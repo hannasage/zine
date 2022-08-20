@@ -8,6 +8,11 @@ interface ZinePageInterface {
   captions: CaptionConfig[] | undefined;
   templateId: Template | undefined;
 }
+export type TemplateBasicInterface = Pick<
+  ZinePageInterface,
+  "images" | "viewTimeRequirement"
+>;
+
 /** Configuration class that's used to render individual pages. */
 export default class ZinePageConfig implements ZinePageInterface {
   /** A collection of image references */
