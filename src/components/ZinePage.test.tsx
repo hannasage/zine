@@ -1,10 +1,9 @@
 import { render } from "@testing-library/react";
 
 import ZinePageConfig from "../configs/ZinePageConfig";
+import { Template } from "../templates";
 
 import { ZinePage } from "./ZinePage";
-
-import { Template } from "./index";
 
 const testConfig = new ZinePageConfig({
   images: [],
