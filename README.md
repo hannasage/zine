@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# Zine
+A micro front-end for viewing my photography the way I intended.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Photography has been made more accessible than ever with the advances in mobile imaging
+and the ability to share high-resolution media across the internet. However great the
+tools have become, what we've made with it -- namely Instagram -- prioritize private
+interests linked with application engagement, rather than preserving the integrity of
+the art viewing experience. 
 
-In the project directory, you can run:
+The `Zine` front-end serves as an interface that can be configured to present my art
+with integrity and intent. The main phenomenon that made me exit the Instagram platform
+(and the photography industry as a whole) is the appeal to validation: arguably the key
+factor in social media's negative mental health effects. Second, I wanted to slow my
+viewers down and impose upon them the burden of consuming art instead of scrolling
+infinitely through it. That's when I came up with the idea to compose a zine from React
+components.
 
-### `npm start`
+## The `Zine` component
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The experience is simple: prevent infinite scroll by requiring the user to view an 
+image for a configurable amount of time, **and** display the images without any
+distraction.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+It is the `Zine`'s job to control the page flow, "releasing" each next
+page as the current page triggers it, after the configured timeout. Meanwhile, the
+`ZinePage` displays the configured template and handles the timer logic.
 
-### `npm test`
+To keep code clean and reusable, timer logic and page flow logic will be contained
+within hooks, `usePageFlow` and `usePageTimer`. The page flow hook will receive an
+array of page configurations, and conditionally add them to an array that's used to
+render the viewable pages. Meanwhile, those page use the page timer hook to time the
+user, and once they've viewed the artwork for the configured amount of time, the page
+flow controller that was passed into the `ZinePage` will be called.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech stack
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Components: `react` via `create-react-app`
+- Styling: `styled-components`
+- Fetching: `react-query` by TanStack
