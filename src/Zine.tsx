@@ -7,8 +7,8 @@ import image4 from "./images/img002.jpg";
 import image5 from "./images/img020.jpg";
 import image6 from "./images/img012.jpg";
 import { Template } from "./templates";
-import ZinePageConfig from "./configs/ZinePageConfig";
-import { ZinePage } from "./components/ZinePage";
+import { ZinePageConfig } from "./configs";
+import { ZinePage } from "./components";
 
 /* TODO: REMOVE!!! SAMPLE FOR DEVELOPING TEMPLATE!!! */
 const testPage = new ZinePageConfig({
