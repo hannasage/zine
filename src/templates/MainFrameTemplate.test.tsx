@@ -5,7 +5,7 @@ import { TemplateBasicInterface } from "../configs/ZinePageConfig";
 import { MainFrameTemplate } from "./MainFrameTemplate";
 
 const testConfig: TemplateBasicInterface = {
-  images: [],
+  images: ["sample-src/sample-img.jpg"],
   viewTimeRequirement: 0,
 };
 
