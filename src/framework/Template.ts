@@ -40,6 +40,8 @@ interface TemplateInterface {
 export class Template implements TemplateInterface {
   props;
   bundle;
+  /** Construct a Template from a ZinePageConfig
+   * @throws {UndefinedBundleError} */
   constructor(config: ZinePageConfig) {
     const bundle = TEMPLATE_MAP.get(config.templateId);
     if (bundle === undefined) throw new UndefinedBundleError(config.templateId);
@@ -47,7 +49,7 @@ export class Template implements TemplateInterface {
     this.bundle = bundle;
   }
   /** Will use `TemplateBundle.validator` to validate props.
-   * @throws {InvalidPropsError} */
+   * @throws {InvalidTemplatePropsError} */
   validateProps(): boolean {
     return this.bundle.validator(this.props);
   }
