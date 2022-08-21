@@ -2,8 +2,11 @@ import React from "react";
 
 import { BasicTemplateProps, ZinePageConfig } from "../configs";
 import { Container, Frame, Image } from "../components";
-import { ValidatorFunction } from "../framework/Template";
-import { InvalidTemplatePropsError } from "../errors";
+import PropValidator from "../framework/PropValidator";
+import {
+  minimumViewTimeRequirementCheck,
+  maxImageLengthCheck,
+} from "../framework/common-rules";
 
 /** TEMPLATE: A single image in a frame. */
 export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
@@ -16,26 +19,17 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
   );
 };
 
-export const imageError = (length: number) =>
-  `This template only supports one image, received: ${length}`;
-export const imageCheck = (images: string[]) => {
-  if (images.length > 1)
-    throw new InvalidTemplatePropsError(imageError(images.length));
-  return true;
-};
+// Supports 1 image when configuring template
+const imageLengthRule = maxImageLengthCheck(1);
+// 1 second minimum view time when configuring template
+const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
 
-export const timeError = (time: number) =>
-  `The viewTimeRequirement must exceed 1 second (1000). Received: ${time}`;
-export const viewTimeCheck = (time: number) => {
-  if (time < 1000) throw new InvalidTemplatePropsError(timeError(time));
-  return true;
-};
-
-export const mainFramePropValidator: ValidatorFunction = (props) => {
-  const { images, viewTimeRequirement } = props;
-  return imageCheck(images) && viewTimeCheck(viewTimeRequirement);
-};
-
+/** PropValidator rule set for the MainFrameTemplate */
+export const mainFramePropValidator = new PropValidator([
+  imageLengthRule,
+  viewTimeMinimumRule,
+]);
+/** Generator function for the MainFrameTemplate */
 export const mainFrameGenerator = (props: ZinePageConfig) => (
   <MainFrameTemplate
     images={props.images}
