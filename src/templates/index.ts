@@ -1,25 +1,13 @@
-import { TemplateBundle } from "../framework/Template";
+import { TemplateBundle } from "../framework";
 
-import {
-  mainFrameGenerator,
-  mainFramePropValidator,
-  MainFrameTemplate,
-} from "./MainFrameTemplate";
+import MainFrameBundle from "./MainFrame/MainFrameBundle";
 
 export enum TemplateName {
   SAMPLE = "sample",
   MAINFRAME = "main-frame",
 }
 
-export const mainFrameBundle = new TemplateBundle({
-  id: TemplateName.MAINFRAME,
-  generator: mainFrameGenerator,
-  validator: mainFramePropValidator,
-});
-
-export const TEMPLATE_MAP = new Map<TemplateName, TemplateBundle>().set(
+export const TEMPLATE_BUNDLES = new Map<TemplateName, TemplateBundle>().set(
   TemplateName.MAINFRAME,
-  mainFrameBundle
+  MainFrameBundle
 );
-
-export { MainFrameTemplate };

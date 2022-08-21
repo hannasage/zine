@@ -1,20 +1,20 @@
 import React from "react";
 
-import image1 from "./images/img028.jpg";
-import { TemplateName } from "./templates";
-import { ZinePageConfig } from "./configs";
-import { ZinePage } from "./components";
-
-/* TODO: REMOVE!!! SAMPLE FOR DEVELOPING TEMPLATE!!! */
-const testPage = new ZinePageConfig({
-  images: [image1],
-  viewTimeRequirement: 1000,
-  templateId: TemplateName.MAINFRAME,
-});
+import TemplateErrorBoundary from "./components/TemplateErrorBoundary";
+import { useAvailablePages } from "./framework";
+import PAGES from "./_data/SampleZine";
+import { ZinePage } from "./components/ZinePage";
 
 /** Controls the render flow of pages. */
 function Zine() {
-  return <ZinePage {...testPage} />;
+  const pages = useAvailablePages(PAGES); // Currently just returns PAGES
+  return (
+    <TemplateErrorBoundary>
+      {pages.map((config, idx) => (
+        <ZinePage key={`${idx}-${config.templateId}`} {...config} />
+      ))}
+    </TemplateErrorBoundary>
+  );
 }
 
 export default Zine;
