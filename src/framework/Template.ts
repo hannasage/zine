@@ -25,18 +25,18 @@ export type TemplateGenerator = (props: ZinePageConfig) => JSX.Element;
 interface TemplateBundleInterface {
   id: TemplateName;
   generator: TemplateGenerator;
-  validator: PropValidator;
+  rules: RuleFunction[];
 }
 /** Object containing methods and members to validate and return a hydrated
  * template. */
 export class TemplateBundle implements TemplateBundleInterface {
   id;
   generator;
-  validator;
-  constructor({ id, generator, validator }: TemplateBundleInterface) {
+  rules;
+  constructor({ id, generator, rules }: TemplateBundleInterface) {
     this.id = id;
     this.generator = generator;
-    this.validator = validator;
+    this.rules = rules;
   }
 }
 
@@ -58,12 +58,6 @@ export class Template implements TemplateInterface {
       this.props = config;
       this.bundle = bundle;
     }
-  }
-  /** Will use `TemplateBundle.validator` to validate props.
-   * @throws {InvalidTemplatePropsError} */
-  validateProps(): void {
-    const { validator } = this.bundle;
-    validator.validate(this.props);
   }
   /** Uses `TemplateBungle.generator` and hydrates it with props. */
   useTemplate(): JSX.Element {

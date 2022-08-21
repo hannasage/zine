@@ -1,4 +1,4 @@
-import { useAvailablePages } from "./extensions-hooks/useAvailablePages";
+import { useAvailablePages, usePropValidator } from "./extensions-hooks";
 import {
   maxImageLengthCheck,
   minimumViewTimeRequirementCheck,
@@ -35,4 +35,4 @@ export { maxImageLengthCheck, minimumViewTimeRequirementCheck };
 export { InvalidTemplatePropsError, UndefinedBundleError };
 
 /* Extensions */
-export { useAvailablePages };
+export { useAvailablePages, usePropValidator };
