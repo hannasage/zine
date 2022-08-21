@@ -1,4 +1,4 @@
-import { Template } from "../templates";
+import { TemplateName } from "../templates";
 
 import CaptionConfig from "./CaptionConfig";
 /** To extend the ZinePage capabilities, implement necessary params
@@ -7,17 +7,17 @@ interface ZinePageInterface {
   images: string[];
   viewTimeRequirement: number;
   captions: CaptionConfig[] | undefined;
-  templateId: Template | undefined;
+  templateId: TemplateName;
 }
 type BasicFeatures = "images" | "viewTimeRequirement";
 type BasicFeaturesWithCaptions = "images" | "viewTimeRequirement" | "captions";
 
 /** A basic template accepts an images array and viewTimeRequirement value.
  * NOTE: _How many_ images is determined by your template. */
-export type TemplateBasicInterface = Pick<ZinePageInterface, BasicFeatures>;
+export type BasicTemplateProps = Pick<ZinePageInterface, BasicFeatures>;
 /** A template that can take both images and captions.
  * NOTE: _How many_ images and captions are determined by your template. */
-export type TemplateWithCaptionsInterface = Pick<
+export type TemplateWithCaptionsProps = Pick<
   ZinePageInterface,
   BasicFeaturesWithCaptions
 >;
@@ -31,7 +31,7 @@ export default class ZinePageConfig implements ZinePageInterface {
   /** A collection of caption configurations */
   captions: CaptionConfig[] | undefined;
   /** An enumerated ID for a template */
-  templateId: Template | undefined;
+  templateId: TemplateName;
   /** NOTE: **ONLY** use this for generating hard-coded
    * @param params {ZinePageInterface} The configuration parameters */
   constructor({

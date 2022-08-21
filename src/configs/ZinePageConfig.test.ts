@@ -1,4 +1,4 @@
-import { Template } from "../templates";
+import { TemplateName } from "../templates";
 
 import ZinePageConfig from "./ZinePageConfig";
 import CaptionConfig from "./CaptionConfig";
@@ -6,7 +6,7 @@ import CaptionConfig from "./CaptionConfig";
 const imgRefArray = ["ref1", "ref2", "ref3"];
 const timeout = 2000;
 const captions = [new CaptionConfig()];
-const template = Template.SAMPLE;
+const template = TemplateName.SAMPLE;
 
 describe("ZinePageConfig", () => {
   test("constructor", () => {

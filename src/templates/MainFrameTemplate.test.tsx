@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 
-import { TemplateBasicInterface } from "../configs/ZinePageConfig";
+import { BasicTemplateProps } from "../configs/ZinePageConfig";
 
 import { MainFrameTemplate } from "./MainFrameTemplate";
 
-const testConfig: TemplateBasicInterface = {
+const testConfig: BasicTemplateProps = {
   images: ["sample-src/sample-img.jpg"],
   viewTimeRequirement: 0,
 };
