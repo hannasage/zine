@@ -10,7 +10,7 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
   return (
     <Container>
       <Frame width={87} height={87}>
-        <Image src={config.images[1]} />
+        <Image src={config.images[0]} />
       </Frame>
     </Container>
   );
