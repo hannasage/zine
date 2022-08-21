@@ -1,4 +1,4 @@
 import InvalidTemplatePropsError from "./InvalidTemplatePropsError";
-import UndefinedBundleError from "./UndefinedBundleError";
+import UndefinedSetupError from "./UndefinedSetupError";
 
-export { InvalidTemplatePropsError, UndefinedBundleError };
+export { InvalidTemplatePropsError, UndefinedSetupError };

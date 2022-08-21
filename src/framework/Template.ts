@@ -1,26 +1,30 @@
 import { TemplateName, TEMPLATES } from "../templates";
 
 import { ZinePageConfig } from "./configs";
-import { UndefinedBundleError } from "./errors";
+import { UndefinedSetupError } from "./errors";
 
 /** Function that validates props for a template */
 export type RuleFunction = (config: ZinePageConfig) => void;
+/** Safely type your own rules with this */
 export type RuleGenerator = (...args: any[]) => RuleFunction;
+/** Function that generates a hydrated template */
+export type TemplateGenerator = (props: ZinePageConfig) => JSX.Element;
 /** The core members of a TemplateSetup */
 export interface TemplateSetup {
   id: TemplateName;
   generator: TemplateGenerator;
   rules: RuleFunction[];
 }
+
+/** Gets a template setup or dies trying!
+ * @throws {UndefinedSetupError} */
 export const getTemplateSetup = (
   templateId: TemplateName
 ): TemplateSetup | never => {
   const template = TEMPLATES.get(templateId);
-  if (template === undefined) throw new UndefinedBundleError(templateId);
+  if (template === undefined) throw new UndefinedSetupError(templateId);
   return template;
 };
-/** Function that generates a hydrated template */
-export type TemplateGenerator = (props: ZinePageConfig) => JSX.Element;
 
 /** Object containing methods and members to validate and return a hydrated
  * template. */
@@ -34,26 +38,23 @@ export class TemplateBundle {
   }
 }
 
-interface TemplateInterface {
+/** Contains the user's props and desired TemplateBundle */
+export class Template {
   props: ZinePageConfig;
   bundle: TemplateBundle;
-}
-/** Contains the user's props and desired TemplateBundle */
-export class Template implements TemplateInterface {
-  props;
-  bundle;
   /** Construct a Template from a ZinePageConfig
-   * @throws {UndefinedBundleError} */
+   * @throws {UndefinedSetupError} */
   constructor(config: ZinePageConfig) {
     this.props = config;
     this.bundle = new TemplateBundle(config.templateId);
   }
-  /** Uses `TemplateBungle.generator` and hydrates it with props. */
+  /** Uses `TemplateBundle.generator` and hydrates it with props. */
   useTemplate(): JSX.Element {
     const { generator } = this.bundle;
     return generator(this.props);
   }
-  /** */
+  /** Uses TemplateBundle.rules to validate this.props
+   * @throws {InvalidTemplatePropsError} */
   validateProps(): void | never {
     this.bundle.rules.forEach((rule) => rule(this.props));
   }

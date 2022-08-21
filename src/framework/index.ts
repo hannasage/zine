@@ -11,7 +11,7 @@ import {
   RuleGenerator,
   RuleFunction,
 } from "./Template";
-import { InvalidTemplatePropsError, UndefinedBundleError } from "./errors";
+import { InvalidTemplatePropsError, UndefinedSetupError } from "./errors";
 import {
   ZinePageConfig,
   BasicTemplateProps,
@@ -33,7 +33,7 @@ export type {
 export { maxImageLengthCheck, minimumViewTimeRequirementCheck };
 
 /* Errors */
-export { InvalidTemplatePropsError, UndefinedBundleError };
+export { InvalidTemplatePropsError, UndefinedSetupError };
 
 /* Extensions */
 export { useAvailablePages, usePropValidator };
