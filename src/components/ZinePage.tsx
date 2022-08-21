@@ -10,7 +10,7 @@ export const ZinePage = (config: ZinePageConfig) => {
     () =>
       new Template({
         props: config,
-        bundle: TEMPLATE_MAP.get(config.templateId)!!,
+        bundle: TEMPLATE_MAP.get(config.templateId)!!, // Throws inside Template if undefined
       }),
     [config]
   );

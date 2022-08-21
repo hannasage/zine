@@ -7,6 +7,7 @@
 
 import { TemplateName } from "../templates";
 import { ZinePageConfig } from "../configs";
+import { UndefinedBundleError } from "../errors";
 /** Validator will either return a boolean or throw with no return */
 type ValidatorReturn = boolean | never;
 /** Function that validates props for a template */
@@ -40,6 +41,7 @@ export class Template implements TemplateInterface {
   props;
   bundle;
   constructor({ props, bundle }: TemplateInterface) {
+    if (bundle === undefined) throw new UndefinedBundleError(props.templateId);
     this.props = props;
     this.bundle = bundle;
   }
