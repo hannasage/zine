@@ -25,10 +25,10 @@ const imageLengthRule = maxImageLengthCheck(1);
 const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
 
 /** PropValidator rule set for the MainFrameTemplate */
-export const mainFramePropValidator = new PropValidator([
+export const mainFramePropValidator = new PropValidator(
   imageLengthRule,
-  viewTimeMinimumRule,
-]);
+  viewTimeMinimumRule
+);
 /** Generator function for the MainFrameTemplate */
 export const mainFrameGenerator = (props: ZinePageConfig) => (
   <MainFrameTemplate
