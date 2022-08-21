@@ -29,13 +29,13 @@ components.
 
 #### Components
 
-Because there's often blurred lines between a component, module, and page when you don't define them intentionally, I decided components are strictly what I can produce with `styled-components`. Everything else is considered a `template` or a module.
+Because there's often blurred lines between a component, module, and page when I don't define them intentionally, I decided components are strictly what I can produce with `styled-components`. Everything else is considered a `template` or a module.
 
 > There are no modules, by this definition, in the application as of Aug 21, 2022.
 
 #### Templates
 
-Templates are specific, hence my validation system for props. Because of this, though, you can utilize `components` to make highly declarative UIs.
+Templates are specific, hence my validation system for props. Because of this, though, you can utilize `components` to make highly specific UIs without conditional rendering.
 
 ```typescript jsx
 /** TEMPLATE: A single image in a frame. */
@@ -50,31 +50,36 @@ export const SingleFrame: React.FC<BasicTemplateProps> = (props) => {
 };
 ```
 
-For example, above, I'm strictly referencing `images[0]` and expecting it to be there. Because of how the framework validates props, you can rest assured `images[0]` won't be undefined here.
+For example, above, I'm strictly referencing `images[0]` and expecting it to be there. Because of how the framework validates props, I can rest assured `images[0]` won't be undefined here.
 
 For context, here's that page configuration from the server:
 
 ```json
 {
   "images": ["/images/img002.jpg"],
-  "viewTimeRequirement": 1000,
   "templateId": "main-frame"
 }
 ```
+
+#### Add a Template to `Zine`
+
+After I've built a template, to make it accessible to the framework, I have to export all necessary members from the module, and then in `templates/index`, add it to the `TEMPLATES` map. I'll need to set up a key in the `TemplateNames` enum, as well, which is how the server references my setup.
 
 ### The `/framework` directory:
 
 #### Template.ts
 
-This is the bread and butter of the framework. When a new `ZinePage` is created, it'll pass the page configuration into the `Template` constructor and get back the tools necessary for validation and rendering. This includes a `TemplateBundle`, which houses your validation rules and generator function.
+This is the bread and butter of the framework. When a new `ZinePage` is created, it'll pass the page configuration into the `Template` constructor and get back the tools necessary for validation and rendering.
 
-The `Template` object allows you to validate and render using this retrieved bundle.
+The `Template` object allows me to validate and render using this retrieved bundle.
 
 ```typescript
 const template = new Template(configFromServer);
 template.validateProps() // Throws from broken rules
 template.useTemplate() // Returns fully hydrated JSX.Element to render
 ```
+
+Underneath the hood, this is the `TemplateBundle`, a collection of rules and a generator function that I define and export from my template's code.
 
 #### configs
 
@@ -90,4 +95,4 @@ React hooks have become one of my favorite things about the library. The way the
 
 #### extensions-rules
 
-Part of validating your props is setting your template's rules. All of my basic rules will be housed in `common-rules`, but this directory allows me to create endless custom rules for validating incoming page configurations against template requirements.
+Part of validating my props is setting my template's rules. All of my basic rules will be housed in `common-rules`, but this directory allows me to create endless custom rules for validating incoming page configurations against template requirements.
