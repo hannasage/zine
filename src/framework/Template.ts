@@ -8,17 +8,15 @@
 import { TEMPLATE_MAP, TemplateName } from "../templates";
 import { ZinePageConfig } from "../configs";
 import { UndefinedBundleError } from "../errors";
-/** Validator will either return a boolean or throw with no return */
-type ValidatorReturn = boolean | never;
-/** Function that validates props for a template */
-export type ValidatorFunction = (props: ZinePageConfig) => ValidatorReturn;
+
+import PropValidator from "./PropValidator";
 /** Function that generates a hydrated template */
 export type TemplateGenerator<T> = (props: T) => JSX.Element;
 /** The core members of a TemplateBundle */
 export interface TemplateBundleInterface<T = any> {
   id: TemplateName;
   generator: TemplateGenerator<T>;
-  validator: ValidatorFunction;
+  validator: PropValidator;
 }
 /** Object containing methods and members to validate and return a hydrated
  * template. */
@@ -50,8 +48,9 @@ export class Template implements TemplateInterface {
   }
   /** Will use `TemplateBundle.validator` to validate props.
    * @throws {InvalidTemplatePropsError} */
-  validateProps(): boolean {
-    return this.bundle.validator(this.props);
+  validateProps(): void {
+    const { validator } = this.bundle;
+    validator.validate(this.props);
   }
   /** Uses `TemplateBungle.generator` and hydrates it with props. */
   useTemplate(): JSX.Element {
