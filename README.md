@@ -1,6 +1,9 @@
 # Zine
 A micro front-end for viewing my photography the way I intended.
 
+- [Templates and components](#templates-and-components)
+- [The framework directory](#the-framework-directory)
+
 ## Overview
 
 Photography has been made more accessible than ever with the advances in mobile imaging
@@ -24,6 +27,8 @@ components.
 - Language: `TypeScript`
 - UI: `react` via `create-react-app`
 - Styling: `styled-components`
+
+---
 
 ### Templates and components
 
@@ -64,6 +69,8 @@ For context, here's that page configuration from the server:
 #### Add a Template to `Zine`
 
 After I've built a template, to make it accessible to the framework, I have to export all necessary members from the module, and then in `templates/index`, add it to the `TEMPLATES` map. I'll need to set up a key in the `TemplateNames` enum, as well, which is how the server references my setup.
+
+---
 
 ### The `/framework` directory:
 
