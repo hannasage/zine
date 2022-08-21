@@ -40,7 +40,7 @@ Because there's often blurred lines between a component, module, and page when I
 
 #### Templates
 
-Templates are specific, hence my validation system for props. Because of this, though, you can utilize `components` to make highly specific UIs without conditional rendering.
+Templates are specific, hence my validation system for props. Because of this, though, you can utilize `props` to make highly specific UIs without conditional rendering.
 
 ```typescript jsx
 /** TEMPLATE: A single image in a frame. */
@@ -68,7 +68,7 @@ For context, here's that page configuration from the server:
 
 #### Add a Template to `Zine`
 
-After I've built a template, to make it accessible to the framework, I have to export all necessary members from the module, and then in `templates/index`, add it to the `TEMPLATES` map. I'll need to set up a key in the `TemplateNames` enum, as well, which is how the server references my setup.
+After I've built a template, to make it accessible to the framework, I have to export all necessary members from the template module, and then in `templates/index`, add it to the `TEMPLATES` map with a unique `TemplateNames` key.
 
 ---
 
@@ -76,9 +76,7 @@ After I've built a template, to make it accessible to the framework, I have to e
 
 #### Template.ts
 
-This is the bread and butter of the framework. When a new `ZinePage` is created, it'll pass the page configuration into the `Template` constructor and get back the tools necessary for validation and rendering.
-
-The `Template` object allows me to validate and render using this retrieved bundle.
+This is the bread and butter of the framework: when I render a new page with a config, the config is fed into `Template.constructor` and it triages the process of validating and retrieving my bundled template, and gives me back two methods that help me validate, hydrate, and render my template.
 
 ```typescript
 const template = new Template(configFromServer);
@@ -86,11 +84,9 @@ template.validateProps() // Throws from broken rules
 template.useTemplate() // Returns fully hydrated JSX.Element to render
 ```
 
-Underneath the hood, this is the `TemplateBundle`, a collection of rules and a generator function that I define and export from my template's code.
-
 #### configs
 
-Home of the aforementioned `ZinePageConfig`. To adapt a new data shape from my service to this micro front-end, I can add a new configuration. I may also need to alter all type checks to consider a union type of possible responses; they currently only accept the one config.
+Home of the aforementioned `ZinePageConfig`. To adapt a new data shape from my service to this micro front-end, I can add a new configuration. I would also need to alter all type checks to consider a union type of possible responses; they currently only accept the one config.
 
 #### errors
 
