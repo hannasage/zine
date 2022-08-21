@@ -16,9 +16,8 @@ export const ZinePage = (config: ZinePageConfig) => {
   );
 
   useEffect(() => {
-    template.validateProps();
+    template.validateProps(); // Throws inside if props are invalid
   }, [template]);
 
-  // TODO: Debug...not rendering!
   return template.useTemplate();
 };
