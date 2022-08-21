@@ -9,11 +9,9 @@ import {
 
 import { MainFrameTemplate } from "./MainFrameTemplate";
 
-export const imageLengthRule = maxImageLengthCheck(1);
-// 1 second minimum view time when configuring template
-export const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
-
-/** Generator function for the MainFrameTemplate */
+const imageLengthRule = maxImageLengthCheck(1);
+const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
+export const mainFrameRules = [imageLengthRule, viewTimeMinimumRule];
 export const mainFrameGenerator = (props: ZinePageConfig) => (
   <MainFrameTemplate
     images={props.images}

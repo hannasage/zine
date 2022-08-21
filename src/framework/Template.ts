@@ -11,31 +11,27 @@ export type RuleGenerator = (...args: any[]) => RuleFunction;
 export type TemplateGenerator = (props: ZinePageConfig) => JSX.Element;
 /** The core members of a TemplateSetup */
 export interface TemplateSetup {
-  id: TemplateName;
   generator: TemplateGenerator;
   rules: RuleFunction[];
 }
 
-/** Gets a template setup or dies trying!
- * @throws {UndefinedSetupError} */
-export const getTemplateSetup = (
-  templateId: TemplateName
-): TemplateSetup | never => {
-  const template = TEMPLATES.get(templateId);
-  if (template === undefined) throw new UndefinedSetupError(templateId);
-  return template;
-};
-
-/** Object containing methods and members to validate and return a hydrated
- * template. */
-export class TemplateBundle {
-  generator;
-  rules;
+/** Takes an id to find the right setup and fill out the bundle. */
+export class TemplateBundle implements TemplateSetup {
+  generator: TemplateGenerator;
+  rules: RuleFunction[];
+  /** @throws {UndefinedSetupError} */
   constructor(templateId: TemplateName) {
-    const setup = getTemplateSetup(templateId);
+    const setup = this.getTemplateSetup(templateId);
     this.generator = setup.generator;
     this.rules = setup.rules;
   }
+  /** Gets a template setup or dies trying!
+   * @throws {UndefinedSetupError} */
+  getTemplateSetup = (templateId: TemplateName): TemplateSetup | never => {
+    const template = TEMPLATES.get(templateId);
+    if (template === undefined) throw new UndefinedSetupError(templateId);
+    return template;
+  };
 }
 
 /** Contains the user's props and desired TemplateBundle */
