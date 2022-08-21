@@ -3,7 +3,10 @@ import React from "react";
 import { BasicTemplateProps, ZinePageConfig } from "../configs";
 import { Container, Frame, Image } from "../components";
 import PropValidator from "../framework/PropValidator";
-import { viewTimeCheck, imageLengthCheck } from "../framework/common-rules";
+import {
+  minimumViewTimeRequirementCheck,
+  maxImageLengthCheck,
+} from "../framework/common-rules";
 
 /** TEMPLATE: A single image in a frame. */
 export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
@@ -17,9 +20,9 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
 };
 
 // Supports 1 image when configuring template
-const imageMinimumRule = imageLengthCheck(1);
+const imageMinimumRule = maxImageLengthCheck(1);
 // 1 second minimum view time when configuring template
-const viewTimeMinimumRule = viewTimeCheck(1000);
+const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
 
 /** PropValidator rule set for the MainFrameTemplate */
 export const mainFramePropValidator = new PropValidator([
