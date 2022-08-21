@@ -1,5 +1,3 @@
-// Supports 1 image when configuring template
-
 import { TemplateName } from "../index";
 import { TemplateBundle } from "../../framework";
 

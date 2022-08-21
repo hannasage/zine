@@ -18,7 +18,7 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
     </Container>
   );
 };
-
+// Supports 1 image file
 const imageLengthRule = maxImageLengthCheck(1);
 // 1 second minimum view time when configuring template
 const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
