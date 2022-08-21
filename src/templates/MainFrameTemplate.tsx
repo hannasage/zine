@@ -20,13 +20,13 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
 };
 
 // Supports 1 image when configuring template
-const imageMinimumRule = maxImageLengthCheck(1);
+const imageLengthRule = maxImageLengthCheck(1);
 // 1 second minimum view time when configuring template
 const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
 
 /** PropValidator rule set for the MainFrameTemplate */
 export const mainFramePropValidator = new PropValidator([
-  imageMinimumRule,
+  imageLengthRule,
   viewTimeMinimumRule,
 ]);
 /** Generator function for the MainFrameTemplate */
