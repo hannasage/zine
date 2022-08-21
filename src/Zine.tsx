@@ -9,7 +9,6 @@ import { ZinePage } from "./components";
 const testPage = new ZinePageConfig({
   images: [image1],
   viewTimeRequirement: 1000,
-  captions: undefined,
   templateId: TemplateName.MAINFRAME,
 });
 
