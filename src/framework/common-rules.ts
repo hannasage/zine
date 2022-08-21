@@ -18,7 +18,7 @@ export const imageLengthCheck =
 
 const timeTooShortMessage = (actual: number, supported: number) =>
   `The viewTimeRequirement must exceed ${supported}. Received: ${actual}`;
-/** RULE: ViewTime is greater than 1s (1000)
+/** RULE: A minimum value (in ms) is required for viewTimeRequirement
  * @throws {InvalidTemplatePropsError} */
 export const viewTimeCheck =
   (viewTime: number): RuleFunction =>
