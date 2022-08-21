@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 
-import ZinePageConfig from "../configs/ZinePageConfig";
+import ZinePageConfig from "../framework/configs/ZinePageConfig";
 import { Template } from "../framework/Template";
 
 /** Controls the template generation and rendering of a page. */

@@ -1,22 +1,20 @@
-import { ZinePageConfig } from "../../configs";
-import { TemplateName } from "../../templates";
-
-import { image1, image2, image3 } from "./index";
+import { ZinePageConfig } from "../framework/configs";
+import { TemplateName } from "../templates";
 
 const page1 = new ZinePageConfig({
-  images: [image1],
+  images: ["/images/img002.jpg"],
   viewTimeRequirement: 1000,
   templateId: TemplateName.MAINFRAME,
 });
 
 const page2 = new ZinePageConfig({
-  images: [image2],
+  images: ["/images/img012.jpg"],
   viewTimeRequirement: 1000,
   templateId: TemplateName.MAINFRAME,
 });
 
 const page3 = new ZinePageConfig({
-  images: [image3],
+  images: ["/images/img020.jpg"],
   viewTimeRequirement: 1000,
   templateId: TemplateName.MAINFRAME,
 });

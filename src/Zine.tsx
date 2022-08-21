@@ -1,40 +1,13 @@
 import React from "react";
 
-import image1 from "./images/img028.jpg";
-import image2 from "./images/img020.jpg";
-import image3 from "./images/img012.jpg";
-import { TemplateName } from "./templates";
-import { ZinePageConfig } from "./configs";
-import { TemplateErrorBoundary, ZinePage } from "./components";
-import { useAvailablePages } from "./framework/useAvailablePages";
-// import { ZinePageConfig } from "./configs";
-// import { image1, image2, image3 } from "./_data/Sample";
-// import { TemplateName } from "./templates";
-// import PAGES from "./_data/Sample/zineConfig";
-
-const page1 = new ZinePageConfig({
-  images: [image1],
-  viewTimeRequirement: 1000,
-  templateId: TemplateName.MAINFRAME,
-});
-
-const page2 = new ZinePageConfig({
-  images: [image2],
-  viewTimeRequirement: 1000,
-  templateId: TemplateName.MAINFRAME,
-});
-
-const page3 = new ZinePageConfig({
-  images: [image3],
-  viewTimeRequirement: 1000,
-  templateId: TemplateName.MAINFRAME,
-});
-
-const PAGES: ZinePageConfig[] = [page1, page2, page3];
+import TemplateErrorBoundary from "./components/TemplateErrorBoundary";
+import { useAvailablePages } from "./framework";
+import PAGES from "./_data/SampleZine";
+import { ZinePage } from "./components/ZinePage";
 
 /** Controls the render flow of pages. */
 function Zine() {
-  const pages = useAvailablePages(PAGES);
+  const pages = useAvailablePages(PAGES); // Currently just returns PAGES
   return (
     <TemplateErrorBoundary>
       {pages.map((config, idx) => (

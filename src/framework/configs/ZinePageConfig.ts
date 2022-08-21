@@ -1,4 +1,4 @@
-import { TemplateName } from "../templates";
+import { TemplateName } from "../../templates";
 
 import CaptionConfig from "./CaptionConfig";
 /** To extend the ZinePage capabilities, implement necessary params

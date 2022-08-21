@@ -1,25 +1,24 @@
 import React from "react";
 
-import { BasicTemplateProps, ZinePageConfig } from "../configs";
-import { Container, Frame, Image } from "../components";
-import PropValidator from "../framework/PropValidator";
+import { BasicTemplateProps, ZinePageConfig } from "../../framework/configs";
+import { Container, Frame, Image } from "../../components/ImageFrame";
 import {
-  minimumViewTimeRequirementCheck,
   maxImageLengthCheck,
-} from "../framework/common-rules";
+  minimumViewTimeRequirementCheck,
+} from "../../framework";
+import { PropValidator } from "../../framework";
 
 /** TEMPLATE: A single image in a frame. */
 export const MainFrameTemplate: React.FC<BasicTemplateProps> = (config) => {
   return (
     <Container>
       <Frame width={87} height={87}>
-        <Image src={config.images[0]} />
+        <Image src={`${process.env.REACT_APP_PUBLIC_URL}${config.images[0]}`} />
       </Frame>
     </Container>
   );
 };
 
-// Supports 1 image when configuring template
 const imageLengthRule = maxImageLengthCheck(1);
 // 1 second minimum view time when configuring template
 const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);

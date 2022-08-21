@@ -1,7 +1,6 @@
 import { InvalidTemplatePropsError } from "../errors";
 import { ZinePageConfig } from "../configs";
-
-import { RuleFunction, RuleGenerator } from "./PropValidator";
+import { RuleFunction, RuleGenerator } from "../index";
 
 const imageLengthMessage = (actual: number, supported: number) =>
   `This template only supports ${supported} image, received: ${actual}`;
