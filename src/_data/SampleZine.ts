@@ -1,4 +1,4 @@
-import { ZinePageConfig } from "../framework/configs";
+import { ZinePageConfig } from "../framework";
 import { TemplateName } from "../templates";
 
 const page1 = new ZinePageConfig({

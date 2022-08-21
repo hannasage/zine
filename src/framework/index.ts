@@ -7,7 +7,7 @@ import {
   TemplateGenerator,
   TemplateBundle,
   Template,
-  PropValidator,
+  TemplateSetup,
   RuleGenerator,
   RuleFunction,
 } from "./Template";
@@ -19,7 +19,7 @@ import {
 } from "./configs";
 
 /* Core framework */
-export { PropValidator, TemplateBundle, Template, ZinePageConfig };
+export { TemplateBundle, Template, TemplateSetup, ZinePageConfig };
 export type {
   RuleGenerator,
   RuleFunction,

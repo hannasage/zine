@@ -1,12 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
-import { PropValidator, RuleFunction } from "../Template";
-import { ZinePageConfig } from "../configs";
+import { Template } from "../Template";
 
-export const usePropValidator = (
-  config: ZinePageConfig,
-  ...rules: RuleFunction[]
-) => {
-  const validator = useMemo(() => new PropValidator(...rules), []);
-  useEffect(() => validator.validate(config));
+export const usePropValidator = (template: Template) => {
+  useEffect(() => {
+    template.validateProps();
+  }, []);
 };

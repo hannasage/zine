@@ -1,13 +1,21 @@
-import { TemplateBundle } from "../framework";
+import { TemplateSetup } from "../framework";
 
-import MainFrameBundle from "./MainFrame/MainFrameBundle";
+import {
+  imageLengthRule,
+  mainFrameGenerator,
+  viewTimeMinimumRule,
+} from "./MainFrame/MainFrameSetup";
 
 export enum TemplateName {
   SAMPLE = "sample",
   MAINFRAME = "main-frame",
 }
 
-export const TEMPLATE_BUNDLES = new Map<TemplateName, TemplateBundle>().set(
+export const TEMPLATES = new Map<TemplateName, TemplateSetup>().set(
   TemplateName.MAINFRAME,
-  MainFrameBundle
+  {
+    id: TemplateName.MAINFRAME,
+    generator: mainFrameGenerator,
+    rules: [imageLengthRule, viewTimeMinimumRule],
+  }
 );

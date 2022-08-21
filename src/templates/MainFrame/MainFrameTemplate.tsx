@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BasicTemplateProps, ZinePageConfig } from "../../framework/configs";
+import { BasicTemplateProps } from "../../framework";
 import { Container, Frame, Image } from "../../components/ImageFrame";
 
 /** TEMPLATE: A single image in a frame. */
@@ -13,11 +13,3 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (props) => {
     </Container>
   );
 };
-
-/** Generator function for the MainFrameTemplate */
-export const mainFrameGenerator = (props: ZinePageConfig) => (
-  <MainFrameTemplate
-    images={props.images}
-    viewTimeRequirement={props.viewTimeRequirement}
-  />
-);

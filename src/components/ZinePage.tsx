@@ -7,6 +7,6 @@ import { Template, usePropValidator } from "../framework";
 export const ZinePage = (config: ZinePageConfig) => {
   // Throws if ZinePageConfig.templateId returns no TemplateBundle
   const template = useMemo(() => new Template(config), [config]);
-  usePropValidator(config, ...template.bundle.rules);
+  usePropValidator(template);
   return template.useTemplate();
 };
