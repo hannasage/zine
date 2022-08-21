@@ -12,7 +12,6 @@ import { useAvailablePages } from "./framework/useAvailablePages";
 const testPage1 = new ZinePageConfig({
   images: [image1],
   viewTimeRequirement: 1000,
-  captions: undefined,
   templateId: TemplateName.MAINFRAME,
 });
 const testPage2 = new ZinePageConfig({

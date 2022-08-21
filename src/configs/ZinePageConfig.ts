@@ -6,8 +6,9 @@ import CaptionConfig from "./CaptionConfig";
 interface ZinePageInterface {
   images: string[];
   viewTimeRequirement: number;
-  captions: CaptionConfig[] | undefined;
   templateId: TemplateName;
+  // Extend under this line, ALL must be optional.
+  captions?: CaptionConfig[];
 }
 type BasicFeatures = "images" | "viewTimeRequirement";
 type BasicFeaturesWithCaptions = "images" | "viewTimeRequirement" | "captions";
@@ -28,10 +29,10 @@ export default class ZinePageConfig implements ZinePageInterface {
   images: string[] = [];
   /** The allotted amount of time to view a page */
   viewTimeRequirement: number = 0;
-  /** A collection of caption configurations */
-  captions: CaptionConfig[] | undefined;
   /** An enumerated ID for a template */
   templateId: TemplateName;
+  /** A collection of caption configurations */
+  captions?: CaptionConfig[];
   /** NOTE: **ONLY** use this for generating hard-coded
    * @param params {ZinePageInterface} The configuration parameters */
   constructor({
