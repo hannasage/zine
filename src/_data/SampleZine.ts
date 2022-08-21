@@ -19,5 +19,5 @@ const page3 = new ZinePageConfig({
   templateId: TemplateName.MAINFRAME,
 });
 
-const PAGES: ZinePageConfig[] = [page1, page2, page3];
-export default PAGES;
+const SampleZine: ZinePageConfig[] = [page1, page2, page3];
+export default SampleZine;

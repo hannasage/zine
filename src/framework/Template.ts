@@ -7,21 +7,10 @@ import { UndefinedBundleError } from "./errors";
 export type RuleFunction = (config: ZinePageConfig) => void;
 export type RuleGenerator = (...args: any[]) => RuleFunction;
 /** The core members of a TemplateSetup */
-interface TemplateSetupInterface {
+export interface TemplateSetup {
   id: TemplateName;
   generator: TemplateGenerator;
   rules: RuleFunction[];
-}
-/** Creates a setup object for a TemplateBundle */
-export class TemplateSetup implements TemplateSetupInterface {
-  id;
-  generator;
-  rules;
-  constructor({ id, generator, rules }: TemplateSetupInterface) {
-    this.id = id;
-    this.generator = generator;
-    this.rules = rules;
-  }
 }
 export const getTemplateSetup = (
   templateId: TemplateName

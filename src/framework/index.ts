@@ -19,11 +19,12 @@ import {
 } from "./configs";
 
 /* Core framework */
-export { TemplateBundle, Template, TemplateSetup, ZinePageConfig };
+export { TemplateBundle, Template, ZinePageConfig };
 export type {
   RuleGenerator,
   RuleFunction,
   TemplateGenerator,
+  TemplateSetup,
   BasicTemplateProps,
   TemplateWithCaptionsProps,
 };
