@@ -5,7 +5,7 @@
  *
  * . */
 
-import { TemplateName } from "../templates";
+import { TEMPLATE_MAP, TemplateName } from "../templates";
 import { ZinePageConfig } from "../configs";
 import { UndefinedBundleError } from "../errors";
 /** Validator will either return a boolean or throw with no return */
@@ -40,9 +40,10 @@ interface TemplateInterface {
 export class Template implements TemplateInterface {
   props;
   bundle;
-  constructor({ props, bundle }: TemplateInterface) {
-    if (bundle === undefined) throw new UndefinedBundleError(props.templateId);
-    this.props = props;
+  constructor(config: ZinePageConfig) {
+    const bundle = TEMPLATE_MAP.get(config.templateId);
+    if (bundle === undefined) throw new UndefinedBundleError(config.templateId);
+    this.props = config;
     this.bundle = bundle;
   }
   /** Will use `TemplateBundle.validator` to validate props.
