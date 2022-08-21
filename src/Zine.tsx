@@ -17,13 +17,11 @@ const testPage1 = new ZinePageConfig({
 const testPage2 = new ZinePageConfig({
   images: [image2],
   viewTimeRequirement: 1000,
-  captions: undefined,
   templateId: TemplateName.MAINFRAME,
 });
 const testPage3 = new ZinePageConfig({
   images: [image3],
   viewTimeRequirement: 1000,
-  captions: undefined,
   templateId: TemplateName.MAINFRAME,
 });
 
