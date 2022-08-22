@@ -8,17 +8,21 @@ A micro front-end for viewing my photography the way I intended.
 
 Photography has been made more accessible than ever with the advances in mobile imaging
 and the ability to share high-resolution media across the internet. However great the
-tools have become, what we've made with it -- namely Instagram -- prioritize private
-interests linked with application engagement, rather than preserving the integrity of
+tools have become, what we've made with it -- namely Instagram -- prioritizes private
+interests linked with application engagement and advertising, rather than preserving the integrity of
 the art viewing experience. 
 
 The `Zine` front-end serves as an interface that can be configured to present my art
 with integrity and intent. The main phenomenon that made me exit the Instagram platform
 (and the photography industry as a whole) is the appeal to validation: arguably the key
-factor in social media's negative mental health effects. Second, I wanted to slow my
+factor in social media's negative mental health effects. I wanted to slow my
 viewers down and impose upon them the burden of consuming art instead of scrolling
 infinitely through it. That's when I came up with the idea to compose a zine from React
-components.
+components that require a timeout before revealing the next image.
+
+Since I eventually want to serve zines from an external service, I needed to build this as a
+framework, not just a front-end application. Below are the details of how I created a page templating
+system that validates props from the server and renders hydrated components. 
 
 ## Engineering
 
