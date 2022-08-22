@@ -32,15 +32,13 @@ components.
 
 ### Templates and components
 
-#### Components
+#### The distinction
 
-Because there's often blurred lines between a component, module, and page when I don't define them intentionally, I decided components are strictly what I can produce with `styled-components`. Everything else is considered a `template` or a module.
+Because there's easily-blurred lines between a component and template, I decided components are strictly what I can produce with `styled-components` AND anything that exists as a means of rendering dynamic content (i.e. `ZinePage`) is a `component`. Everything else is considered a `template`.
 
-> There are no modules, by this definition, in the application as of Aug 21, 2022.
+#### How templates work
 
-#### Templates
-
-Templates are specific, hence my validation system for props. Because of this, though, you can utilize `props` to make highly specific UIs without conditional rendering.
+Templates are specific, hence my validation system for props. Because of this, though, you can utilize `props` to make highly specific UIs without providing failsafes for possible undefined values. This simplifies writing the visual markup and keeps the `jsx` clean. Additionally, the use of `styled-components` to generate these basline elements means styling is plugged in through props! No external `css`. 
 
 ```typescript jsx
 /** TEMPLATE: A single image in a frame. */
@@ -55,7 +53,7 @@ export const SingleFrame: React.FC<BasicTemplateProps> = (props) => {
 };
 ```
 
-For example, above, I'm strictly referencing `images[0]` and expecting it to be there. Because of how the framework validates props, I can rest assured `images[0]` won't be undefined here.
+For example, above, I'm referencing `images[0]` without an optional chain or checking the length first. Because of how the framework validates props, I can rest assured `images[0]` won't be undefined here.
 
 For context, here's that page configuration from the server:
 
@@ -68,7 +66,16 @@ For context, here's that page configuration from the server:
 
 #### Add a Template to `Zine`
 
-After I've built a template, to make it accessible to the framework, I have to export all necessary members from the template module, and then in `templates/index`, add it to the `TEMPLATES` map with a unique `TemplateNames` key.
+After I've built a template, to make it accessible to the framework, I have to export all necessary members from the template module. This inclueds a `RuleFunction[]` and `TemplateGenerator` function. In `templates/index`, add it to the `TEMPLATES` map with a unique `TemplateNames` key.
+
+```typescript
+const myTemplateSetup: TemplateSetup = { 
+    rules: myTemplateRules, 
+    generator: myTemplateGenerator 
+}
+
+TEMPLATES.set(TemplateNames.MY_TEMPLATE, myTemplateSetup);
+```
 
 ---
 
