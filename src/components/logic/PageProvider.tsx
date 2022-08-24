@@ -11,7 +11,7 @@ import {
   PageFeatureController,
   useAvailablePages,
   ZinePageConfig,
-} from "../framework";
+} from "../../framework";
 
 interface IPageContext extends PageFeatureController {}
 // Create the default PageContext (empty)

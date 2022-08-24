@@ -38,11 +38,13 @@ system that validates props from the server and renders hydrated components.
 
 #### The distinction
 
-Because there's easily-blurred lines between a component and template, I decided components are strictly what I can produce with `styled-components` AND anything that exists as a means of rendering dynamic content (i.e. `ZinePage`) is a `component`. Everything else is considered a `template`.
+Because there's easily-blurred lines between a component and template, I decided components are strictly what I can produce with `styled-components` (blocks) AND anything that's adds functionality but does not directly render JSX (logical) is a `component`. 
+
+A `template` utilizes block components to build interfaces. They can take advantage of extensions of functionality through hooks, but are primarily composed of JSX.
 
 #### How templates work
 
-Templates are specific, hence my validation system for props. Because of this, though, you can utilize `props` to make highly specific UIs without providing failsafes for possible undefined values. This simplifies writing the visual markup and keeps the `jsx` clean. Additionally, the use of `styled-components` to generate these basline elements means styling is plugged in through props! No external `css`. 
+Templates are declared without any null checks, hence my validation system for props. This simplifies writing the visual markup and keeps the `jsx` clean. Instead of relying on conditional render logic, I've outsourced the validation of props to the `Template` object. Each template can define a set of rules to check props against. This lets me build templates free of any conditional renders.
 
 ```typescript jsx
 /** TEMPLATE: A single image in a frame. */
@@ -57,7 +59,7 @@ export const SingleFrame: React.FC<BasicTemplateProps> = (props) => {
 };
 ```
 
-For example, above, I'm referencing `images[0]` without an optional chain or checking the length first. Because of how the framework validates props, I can rest assured `images[0]` won't be undefined here.
+For example, above, I'm referencing `images[0]` without an optional chain or checking the length first. Because of how the framework validates props, I can rest assured `images[0]` won't be undefined here. No back-up UI needed.
 
 For context, here's that page configuration from the server:
 
@@ -70,7 +72,18 @@ For context, here's that page configuration from the server:
 
 #### Add a Template to `Zine`
 
-After I've built a template, to make it accessible to the framework, I have to export all necessary members from the template module. This inclueds a `RuleFunction[]` and `TemplateGenerator` function. In `templates/index`, add it to the `TEMPLATES` map with a unique `TemplateNames` key.
+To accompany a template file, there's a setup file. This will include my template rules, such as `maxImagesLengthCheck(1)`, which tells the templating system that this template only takes one image. It'll also include a generator function which stands to take in the page config, and pass the props into the component, returning the `JSX.Element`, fully hydrated.
+
+```typescript jsx
+export const mainFrameGenerator = (props: ZinePageConfig) => (
+  <MainFrameTemplate
+    images={props.images}
+    viewTimeRequirement={props.viewTimeRequirement}
+  />
+);
+```
+
+Once your rules array and generator function are exported from the file, I'll head over into `templates/index.ts` and add my setup to the `TEMPLATES` export. This exported map uses a key from the `TemplateNames` enumerated class and matches it to a setup. A `Template` object, when initialized, will seek out the right template setup, and throw if it cannot find it in this map.
 
 ```typescript
 const myTemplateSetup: TemplateSetup = { 
@@ -95,18 +108,28 @@ template.validateProps() // Throws from broken rules
 template.hydrate() // Returns fully hydrated JSX.Element to render
 ```
 
-#### configs
+These methods are used within `react` components and hooks to render the templates, rather than rendering them directly in JSX. This allows me to extract things like template rules and form more robust systems around reporting errors with page configurations. 
 
-Home of the aforementioned `ZinePageConfig`. To adapt a new data shape from my service to this micro front-end, I can add a new configuration. I would also need to alter all type checks to consider a union type of possible responses; they currently only accept the one config.
+The goal is to not have to ever hard-code a zine: just load the page and whatever zine I've released via my zine delivery service will populate on the page. 
+
+Furthermore, this mimics the artistic process I follow. Template design here is akin to page layout design in something like Adobe inDesign. Letting me focus solely on the design and **not** the logic when working within my `zine` repository is a major win.
+
+#### configs (and evolving Zine)
+
+While `Zine` is built to be a dynamic templating system for online photography zines, it theoretically can be adapted to take many types of configs. Using classes for server-returned props lets me check `instanceof` and conditionally render different experiences. The main issue with this is that templates would become mixed, and it'd be unclear which template was for what experience. To combat this, what I might consider doing is packaging the framework and using it across other micro front-ends.
 
 #### errors
 
-Custom error types allow me to package additional functionality as well as conditionally render on a generic error page. Right now, there's a `TemplateErrorBoundary` wrapping the app to catch errors.
+Custom errors were a must when considering my developer experience. I'm not going to be adding or removing data in _this_ app once the delivery service is stood up, so I need my console and my UI to _really_ give me the details of these errors. Right now, there's no custom error UI, but my console messaging is top-notch. The `react` error boundary is a "catch-all" `catch` block for failures within the applications. Since this is a micro front-end, there's little to no need to use this boundary outside of `App.tsx`
 
 #### extensions-hooks
 
-React hooks have become one of my favorite things about the library. The way they, pun intended, react like a nervous system to data really entices me, and gets me excited to engineer things. While the _core_ features of my mvp include things like `usePropValidator` and `useAvailablePages`, theoretically _anything_ can be added to the bank of functionality accessible to templates by adding a new hook.
+Hook design is something I'm still working out. Most features thus far have taken the shape of non-returning hooks, or "effects". This seems to be the best way to hook `react` into my `Template` framework. So far, I've added two app-level hooks for validation of props, which is non-returning and throws on invalid props, and a page timer that uses a timeout to trigger an action after a given amount of time.
+
+Returning hooks, hooks that require being stored as variables, aren't necessarily out of the question, but I haven't found a use for them _yet_ beyond delivering my context (`usePageContext`). As the UI evolves, I think more UI controller-based extensions could show up.
 
 #### extensions-rules
 
-Part of validating my props is setting my template's rules. All of my basic rules will be housed in `common-rules`, but this directory allows me to create endless custom rules for validating incoming page configurations against template requirements.
+Rules are the _most_ fun part of this system, to me. These replace the need for conditionals inside templates, but best of all, they're _suuuuper_ customizable. I could run _deep_ checks on data before rendering if I wanted. I could validate props against network data, something that'd be super messy when built into a `react` component with an effect hook.
+
+Future considerations for rules are always flying through my head. One formidable challenge would be measuring whether an image is portrait or landscape and defining a rule around that.

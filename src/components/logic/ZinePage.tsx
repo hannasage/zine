@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
-import ZinePageConfig from "../framework/configs/ZinePageConfig";
-import { Template, usePageTimer, usePropValidator } from "../framework";
+import ZinePageConfig from "../../framework/configs/ZinePageConfig";
+import { Template, usePageTimer, usePropValidator } from "../../framework";
 
 /** Controls the template generation, rendering, and timing of a page. */
 export const ZinePage = (config: ZinePageConfig) => {

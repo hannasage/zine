@@ -1,8 +1,8 @@
-import { Frame, Image, Container } from "./ImageFrame";
-import PageProvider, { usePageContext } from "./PageProvider";
-import TemplateErrorBoundary from "./TemplateErrorBoundary";
-import { Zine } from "./Zine";
-import { ZinePage } from "./ZinePage";
+import { Frame, Image, Container } from "./blocks/ImageFrame";
+import PageProvider, { usePageContext } from "./logic/PageProvider";
+import TemplateErrorBoundary from "./logic/TemplateErrorBoundary";
+import { Zine } from "./logic/Zine";
+import { ZinePage } from "./logic/ZinePage";
 
 export {
   Frame,
