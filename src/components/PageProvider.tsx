@@ -6,9 +6,12 @@ import {
   useEffect,
 } from "react";
 
-import { useAvailablePages, ZinePageConfig } from "../framework";
-import EmptyZineError from "../framework/errors/EmptyZineError";
-import { PageFeatureController } from "../framework/extensions-hooks/useAvailablePages";
+import {
+  EmptyZineError,
+  PageFeatureController,
+  useAvailablePages,
+  ZinePageConfig,
+} from "../framework";
 
 interface IPageContext extends PageFeatureController {}
 

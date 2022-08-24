@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 
 import { BasicTemplateProps } from "../../framework";
-import { Container, Frame, Image } from "../../components/ImageFrame";
-import { usePageContext } from "../../components/PageProvider";
+import { Container, Frame, Image, usePageContext } from "../../components";
 
 /** TEMPLATE: A single image in a frame. */
 export const MainFrameTemplate: React.FC<BasicTemplateProps> = (props) => {

@@ -1,8 +1,11 @@
 import React from "react";
 
-import TemplateErrorBoundary from "./components/TemplateErrorBoundary";
-import { ZinePage } from "./components/ZinePage";
-import PageProvider, { usePageContext } from "./components/PageProvider";
+import {
+  TemplateErrorBoundary,
+  ZinePage,
+  PageProvider,
+  usePageContext,
+} from "./components";
 import { ZinePageConfig } from "./framework";
 
 /** Controls the render flow of pages. */
