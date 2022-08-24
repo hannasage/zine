@@ -14,12 +14,14 @@ import {
 } from "../framework";
 
 interface IPageContext extends PageFeatureController {}
-
+// Create the default PageContext (empty)
 const PageContext = createContext<IPageContext>({
   availablePages: [] as ZinePageConfig[],
   makeNextPageAvailable: () => {},
 } as PageFeatureController);
 
+/** Wrap the app in this and provide the useAvailablePages functionality to every
+ * component. */
 const PageProvider: FC<PropsWithChildren<{ zine: ZinePageConfig[] }>> = ({
   zine,
   children,
@@ -33,6 +35,7 @@ const PageProvider: FC<PropsWithChildren<{ zine: ZinePageConfig[] }>> = ({
     <PageContext.Provider value={pagesHook}>{children}</PageContext.Provider>
   );
 };
+/** Consume the PageProvider value and utilize the controllers for pages */
 export const usePageContext = () => useContext(PageContext);
 
 export default PageProvider;
