@@ -12,11 +12,7 @@ import {
   RuleFunction,
 } from "./Template";
 import { InvalidTemplatePropsError, UndefinedSetupError } from "./errors";
-import {
-  ZinePageConfig,
-  BasicTemplateProps,
-  TemplateWithCaptionsProps,
-} from "./configs";
+import { ZinePageConfig, BasicTemplateProps } from "./configs";
 
 /* Core framework */
 export { TemplateBundle, Template, ZinePageConfig };
@@ -26,7 +22,6 @@ export type {
   TemplateGenerator,
   TemplateSetup,
   BasicTemplateProps,
-  TemplateWithCaptionsProps,
 };
 
 /* Rules */

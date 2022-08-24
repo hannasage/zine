@@ -2,16 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
-import Zine from "./Zine";
 import reportWebVitals from "./reportWebVitals";
+import App from "./Zine";
+import SampleZine from "./_data/SampleZine";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <Zine />
-  </React.StrictMode>
+  // Commented out because it fucks with hook behavior in development.
+  // <React.StrictMode>
+  <App zine={SampleZine} />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
