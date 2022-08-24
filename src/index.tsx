@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import App from "./Zine";
+import App from "./App";
 import SampleZine from "./_data/SampleZine";
 
 const root = ReactDOM.createRoot(
