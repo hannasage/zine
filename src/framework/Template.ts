@@ -45,7 +45,7 @@ export class Template {
     this.bundle = new TemplateBundle(config.templateId);
   }
   /** Uses `TemplateBundle.generator` and hydrates it with props. */
-  useTemplate(): JSX.Element {
+  hydrate(): JSX.Element {
     const { generator } = this.bundle;
     return generator(this.props);
   }

@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 
 import ZinePageConfig from "../framework/configs/ZinePageConfig";
-import { Template, usePropValidator } from "../framework";
+import { Template, usePageTimer, usePropValidator } from "../framework";
 
-/** Controls the template generation and rendering of a page. */
+/** Controls the template generation, rendering, and timing of a page. */
 export const ZinePage = (config: ZinePageConfig) => {
   // Throws if ZinePageConfig.templateId returns no TemplateBundle
   const template = useMemo(() => new Template(config), [config]);
+  // Throws if any props are invalid for the desired template
   usePropValidator(template);
-  return template.useTemplate();
+  // Handles releasing the next page
+  usePageTimer(config.viewTimeRequirement);
+  return template.hydrate();
 };

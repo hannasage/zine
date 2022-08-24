@@ -92,7 +92,7 @@ This is the bread and butter of the framework: when I render a new page with a c
 ```typescript
 const template = new Template(configFromServer);
 template.validateProps() // Throws from broken rules
-template.useTemplate() // Returns fully hydrated JSX.Element to render
+template.hydrate() // Returns fully hydrated JSX.Element to render
 ```
 
 #### configs
