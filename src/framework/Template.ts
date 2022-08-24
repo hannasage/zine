@@ -52,6 +52,7 @@ export class Template {
   /** Uses TemplateBundle.rules to validate this.props
    * @throws {InvalidTemplatePropsError} */
   validateProps(): void | never {
-    this.bundle.rules.forEach((rule) => rule(this.props));
+    const { rules } = this.bundle;
+    rules.forEach((rule) => rule(this.props));
   }
 }
