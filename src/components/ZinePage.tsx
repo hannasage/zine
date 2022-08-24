@@ -11,5 +11,6 @@ export const ZinePage = (config: ZinePageConfig) => {
   usePropValidator(template);
   // Handles releasing the next page
   usePageTimer(config.viewTimeRequirement);
+  // Hydrate and render the component now that everything is valid
   return template.hydrate();
 };
