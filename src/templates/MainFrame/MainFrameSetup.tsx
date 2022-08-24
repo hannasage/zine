@@ -2,15 +2,15 @@
 import React from "react";
 
 import {
-  maxImageLengthCheck,
-  minimumViewTimeRequirementCheck,
+  maxImagesLengthCheck,
+  minimumViewTimeCheck,
   ZinePageConfig,
 } from "../../framework";
 
 import { MainFrameTemplate } from "./MainFrameTemplate";
 
-const imageLengthRule = maxImageLengthCheck(1);
-const viewTimeMinimumRule = minimumViewTimeRequirementCheck(1000);
+const imageLengthRule = maxImagesLengthCheck(1);
+const viewTimeMinimumRule = minimumViewTimeCheck(1000);
 export const mainFrameRules = [imageLengthRule, viewTimeMinimumRule];
 export const mainFrameGenerator = (props: ZinePageConfig) => (
   <MainFrameTemplate

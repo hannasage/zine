@@ -5,8 +5,8 @@ import {
   usePageTimer,
 } from "./extensions-hooks";
 import {
-  maxImageLengthCheck,
-  minimumViewTimeRequirementCheck,
+  maxImagesLengthCheck,
+  minimumViewTimeCheck,
 } from "./extensions-rules/common-rules";
 import {
   TemplateGenerator,
@@ -34,7 +34,7 @@ export type {
 };
 
 /* Rules */
-export { maxImageLengthCheck, minimumViewTimeRequirementCheck };
+export { maxImagesLengthCheck, minimumViewTimeCheck };
 
 /* Errors */
 export { InvalidTemplatePropsError, UndefinedSetupError, EmptyZineError };
