@@ -1,7 +1,4 @@
-import ZinePageConfig, {
-  BasicTemplateProps,
-  TemplateWithCaptionsProps,
-} from "./ZinePageConfig";
+import ZinePageConfig, { BasicTemplateProps } from "./ZinePageConfig";
 
 export { ZinePageConfig };
-export type { BasicTemplateProps, TemplateWithCaptionsProps };
+export type { BasicTemplateProps };

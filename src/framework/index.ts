@@ -1,4 +1,9 @@
-import { useAvailablePages, usePropValidator } from "./extensions-hooks";
+import {
+  useAvailablePages,
+  usePropValidator,
+  PageFeatureController,
+  usePageTimer,
+} from "./extensions-hooks";
 import {
   maxImageLengthCheck,
   minimumViewTimeRequirementCheck,
@@ -11,12 +16,12 @@ import {
   RuleGenerator,
   RuleFunction,
 } from "./Template";
-import { InvalidTemplatePropsError, UndefinedSetupError } from "./errors";
 import {
-  ZinePageConfig,
-  BasicTemplateProps,
-  TemplateWithCaptionsProps,
-} from "./configs";
+  InvalidTemplatePropsError,
+  UndefinedSetupError,
+  EmptyZineError,
+} from "./errors";
+import { ZinePageConfig, BasicTemplateProps } from "./configs";
 
 /* Core framework */
 export { TemplateBundle, Template, ZinePageConfig };
@@ -26,14 +31,14 @@ export type {
   TemplateGenerator,
   TemplateSetup,
   BasicTemplateProps,
-  TemplateWithCaptionsProps,
 };
 
 /* Rules */
 export { maxImageLengthCheck, minimumViewTimeRequirementCheck };
 
 /* Errors */
-export { InvalidTemplatePropsError, UndefinedSetupError };
+export { InvalidTemplatePropsError, UndefinedSetupError, EmptyZineError };
 
 /* Extensions */
-export { useAvailablePages, usePropValidator };
+export { useAvailablePages, usePropValidator, usePageTimer };
+export type { PageFeatureController };
