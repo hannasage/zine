@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { BasicTemplateProps } from "../../framework";
-import { Container, Frame, Image, usePageContext } from "../../components";
+import { BasicTemplateProps, usePageTimer } from "../../framework";
+import { Container, Frame, Image } from "../../components";
 
 /** TEMPLATE: A single image in a frame. */
 export const MainFrameTemplate: React.FC<BasicTemplateProps> = (props) => {
-  const { makeNextPageAvailable } = usePageContext();
-  useEffect(() => {
-    setTimeout(makeNextPageAvailable, props.viewTimeRequirement);
-  }, []); //eslint-disable-line
-
+  usePageTimer(props.viewTimeRequirement);
   return (
     <Container>
       <Frame width={87} height={87}>

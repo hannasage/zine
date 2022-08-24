@@ -2,6 +2,7 @@ import {
   useAvailablePages,
   usePropValidator,
   PageFeatureController,
+  usePageTimer,
 } from "./extensions-hooks";
 import {
   maxImageLengthCheck,
@@ -39,5 +40,5 @@ export { maxImageLengthCheck, minimumViewTimeRequirementCheck };
 export { InvalidTemplatePropsError, UndefinedSetupError, EmptyZineError };
 
 /* Extensions */
-export { useAvailablePages, usePropValidator };
+export { useAvailablePages, usePropValidator, usePageTimer };
 export type { PageFeatureController };
