@@ -11,5 +11,5 @@ export const ZinePage = (config: ZinePageConfig) => {
   usePropValidator(template);
   // Handles releasing the next page
   usePageTimer(config.viewTimeRequirement);
-  return template.useTemplate();
+  return template.hydrate();
 };
