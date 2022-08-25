@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:write": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\""
+    "lint:write": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
+    "zine:component": "./zine.sh component"
   },
   "eslintConfig": {
     "extends": [

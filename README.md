@@ -73,7 +73,7 @@ For context, here's that page configuration from the server:
 To add a new component to `Zine`, use the following command from the root project directory:
 
 ```
-./zine.sh component
+yarn zine:component
 ```
 
 You will be prompted for a type, either a `logic` or `block` component. Anything visual should follow the rule that if it _can_ be a block, it _should_ be a block. A logic component is a tsx file that serves as a logical layer of the app. For example, `ZinePage` handles effects and prop validation, while the Template system handles rendering the template composed of blocks.
