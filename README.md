@@ -38,7 +38,7 @@ system that validates props from the server and renders hydrated components.
 
 #### The distinction
 
-Because there's easily-blurred lines between a component and template, I decided components are strictly what I can produce with `styled-components` (blocks) AND anything that's adds functionality but does not directly render JSX (logical) is a `component`. 
+Because there's easily-blurred lines between a component and template, I decided anything I can produce with `styled-components` (blocks) AND anything that adds functionality but does not directly render JSX (logical) is a `component`. 
 
 A `template` utilizes block components to build interfaces. They can take advantage of extensions of functionality through hooks, but are primarily composed of JSX.
 
