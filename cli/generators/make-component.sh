@@ -23,11 +23,11 @@ else
   FILE_EXTENSION="tsx"
 fi
 
-touch ../../src/components/$componentType/$componentName.$FILE_EXTENSION
-sed -e "s/COMPONENT_NAME/$componentName/g" ./code-templates/$componentType.$FILE_EXTENSION > ../../src/components/$componentType/$componentName.$FILE_EXTENSION
+touch ./src/components/$componentType/$componentName.$FILE_EXTENSION
+sed -e "s/COMPONENT_NAME/$componentName/g" ./cli/generators/code-templates/$componentType.$FILE_EXTENSION > ./src/components/$componentType/$componentName.$FILE_EXTENSION
 
-echo $IMPORT|cat - ../../src/components/index.ts > /tmp/out && mv /tmp/out ../../src/components/index.ts
-echo $EXPORT >> ../../src/components/index.ts
-sed -i.old "s/COMPONENT_NAME/$componentName/g" ../../src/components/index.ts
-sed -i.old "s/COMPONENT_TYPE/$componentType/g" ../../src/components/index.ts
-rm ../../src/components/index.ts.old
+echo $IMPORT|cat - ./src/components/index.ts > /tmp/out && mv /tmp/out ./src/components/index.ts
+echo $EXPORT >> ./src/components/index.ts
+sed -i.old "s/COMPONENT_NAME/$componentName/g" ./src/components/index.ts
+sed -i.old "s/COMPONENT_TYPE/$componentType/g" ./src/components/index.ts
+rm ./src/components/index.ts.old
