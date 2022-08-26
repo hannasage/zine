@@ -14,4 +14,4 @@ export enum TemplateName {
 export const TEMPLATES = new Map<TemplateName, TemplateSetup>().set(
   TemplateName.MAINFRAME,
   { generator: mainFrameGenerator, rules: mainFrameRules }
-);
+); //

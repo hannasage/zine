@@ -1,6 +1,3 @@
-import {} from ".//";
-import {} from ".//";
-import {} from ".//";
 import { Frame } from "./block/Frame";
 import { Container } from "./block/Container";
 import { Image } from "./block/Image";
