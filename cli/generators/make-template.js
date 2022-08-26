@@ -57,36 +57,31 @@ function makeSetupMapEntry(name) {
 function makeEnumEntry(name) {
   return `${makeEnumName(name)} = "${name}"}`;
 }
-/** Creates a template generator as a string.
+/** Configures pieces for `templates/index.ts` as strings.
  *
- * @example
- * "export const MyTemplateGenerator = () => <MyTemplate />"
+ * @param piece {"enum" | "setup"} Type of config piece to create
  * @param name {string} The name argument from CLI
- * @returns string
- * */
-function makeGeneratorExport(name) {
-  function template(templateComponentName) {
-    return `export const ${templateComponentName}Generator = () => <${templateComponentName} />`;
-  }
-}
-
-function makeConfigPiece(type, name) {
+ * @returns string */
+function makeConfigPiece(piece, name) {
   if (!name || name === "") throw new Error("Name is a required variable");
-  switch (type) {
+  switch (piece) {
     case "enum":
       makeEnumEntry(name);
-      break;
-    case "generator":
-      makeGeneratorExport(name);
       break;
     case "setup":
       makeSetupMapEntry(name);
       break;
     default:
-      throw new Error(`Not a valid name type: ${type}`);
+      throw new Error(`Not a valid config piece: ${piece}`);
   }
 }
-
+/** Main entry point for making a template. This function uses `template.tsx`
+ * in the `code-templates` directory to generate files for `src`. It uses string
+ * replacement to customize the templates and add their exports to the templates
+ * index file.
+ *
+ * @param name {string} The name argument from CLI
+ * @returns void*/
 function makeTemplate(name) {
   const templateContents = fs.readFileSync(
     "./code-templates/template.tsx",
