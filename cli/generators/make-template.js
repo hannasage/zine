@@ -1,44 +1,71 @@
 const fs = require("fs");
 
-const LOGIC_KEY = "logic";
-const BLOCK_KEY = "block";
-const TEMPLATE_KEY = "template";
-
-const CODE_TEMPLATES = new Map()
-  .set(LOGIC_KEY, "./code-templates/logic.tsx")
-  .set(BLOCK_KEY, "./code-templates/block.ts")
-  .set(TEMPLATE_KEY, "./code-templates/block.ts");
-
-const INDEXES = new Map().set(LOGIC_KEY, "").set(BLOCK_KEY, "");
-
 function ANCHOR_REGEX(anchorTerm) {
-  return `\\);\\s\\/\\/${anchorTerm}`;
-}
-function getSource(key, map) {
-  const template = map.get(key);
-  if (!template) throw new Error(`Could not find template: ${key}`);
-  return template;
+  return RegExp(`;\\s\\/\\/${anchorTerm}`);
 }
 
-function getTemplate(key) {
-  return getSource(key, CODE_TEMPLATES);
-}
-function getIndex(key) {
-  return getSource(key, INDEXES);
+function templateMapCode(enumName, generatorName, rulesName) {
+  return `.set(
+    ${enumName},
+    { generator: ${generatorName}, rules: ${rulesName} }
+    );`;
 }
 
-function makeTemplate() {
-  const templateContents = fs.readFileSync(getTemplate(TEMPLATE_KEY), "utf-8");
-  const indexContents = fs.readFileSync(getIndex(TEMPLATE_KEY), "utf-8");
+function makeEnum(name) {
+  const enumKey = name.toUpperCase();
+  if (enumKey.includes("-")) {
+    return `${enumKey.replaceAll("-", "_")} = "${name}"`;
+  }
+  return `${enumKey} = "${name}"}`;
+}
 
-  const modifiedTemplateContents = templateContents.replace("TEMP_NAME", "");
+function makeRules(name) {
+  function template(generatorKey, rulesKey) {
+    return `{ generator: ${generatorKey}, rules: ${rulesKey} }`;
+  }
+}
+
+function makeGenerator(name) {
+  function template(templateComponentName) {
+    return `export const ${templateComponentName}Generator = () => <${templateComponentName} />`;
+  }
+}
+
+function makeConfigPiece(type, name) {
+  if (!name || name === "") throw new Error("Name is a required variable");
+  switch (type) {
+    case "enum":
+      makeEnum(name);
+      break;
+    case "generator":
+      makeGenerator(name);
+      break;
+    case "rules":
+      makeRules(name);
+      break;
+    default:
+      throw new Error(`Not a valid name type: ${type}`);
+  }
+}
+
+function makeTemplate(name) {
+  const templateContents = fs.readFileSync(
+    "./code-templates/template.tsx",
+    "utf-8"
+  );
+  const indexContents = fs.readFileSync("./src/templates/index.ts", "utf-8");
+
+  const modifiedTemplateContents = templateContents.replace(
+    RegExp(/TEMP_NAME/g),
+    "TEST_SUCCEEDED"
+  );
   const modifiedIndexContents = indexContents.replace(
-    ANCHOR_REGEX("map-anchor"),
-    ""
+    ANCHOR_REGEX("anchor"),
+    templateMapCode()
   );
 
-  fs.writeFileSync("./_test/indexTest.ts", modifiedIndexContents);
-  fs.writeFileSync("./_test/templateTest.tsx", modifiedTemplateContents);
+  fs.writeFileSync("./cli/_test/indexTest.ts", modifiedIndexContents);
+  fs.writeFileSync("./cli/_test/templateTest.tsx", modifiedTemplateContents);
 }
 
 module.exports = makeTemplate;
