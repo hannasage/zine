@@ -142,3 +142,7 @@ To set up:
 ```
 yarn cli:init
 ```
+
+### Commands
+
+- [`templat <name>`](#add-a-template-to-zine) - Generates a new Zine template
