@@ -25,7 +25,7 @@ function makeAnchorRegex(anchorTerm, includeSemicolon) {
  * */
 function makeEnumName(name) {
   const enumKey = name.toUpperCase();
-  if (enumKey.includes("-")) return enumKey.replace("-", "_");
+  if (enumKey.includes("-")) return enumKey.replace(/-/g, "_");
   return enumKey;
 }
 /** Make name arg into component name. Component names are templated in new files.
@@ -37,8 +37,17 @@ function makeComponentName(name) {
   function capitalize(word) {
     return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
   }
-  const words = name.split("-");
-  return `${words.map((wordInName) => capitalize(wordInName))}`;
+  let words = name.split("-");
+  words = words.map((wordInName) => capitalize(wordInName));
+  return `${words.join("")}`;
+}
+/**  */
+function makeGeneratorName(name) {
+  return `${makeComponentName(name)}Generator`;
+}
+/**  */
+function makeRulesName(name) {
+  return `${makeComponentName(name)}Rules`;
 }
 /** Creates a `TemplateSetup` object as a string.
  *
@@ -48,9 +57,9 @@ function makeComponentName(name) {
  * @returns string
  * */
 function makeTemplateSetup(name) {
-  return `{ generator: ${makeComponentName(
+  return `{ generator: ${makeGeneratorName(name)}, rules: ${makeRulesName(
     name
-  )}Generator, rules: ${makeComponentName(name)}Rules }`;
+  )} }`;
 }
 /** Creates a string to replace the anchor at the end of the TEMPLATE map
  * in `templates/index.ts`
@@ -59,10 +68,16 @@ function makeTemplateSetup(name) {
  * @return string
  * */
 function makeSetupMapEntry(name) {
-  return `.set(\n
-    ${makeEnumName(name)},\n
-    ${makeTemplateSetup(name)}\n
-    ); // TemplateMapAnchor`;
+  return `\r\n\t.set(TemplateName.${makeEnumName(name)}, {
+    generator: ${makeGeneratorName(name)},
+    rules: ${makeRulesName(name)},
+  }); // TemplateMapAnchor`;
+}
+/**  */
+function makeImport(name) {
+  return `import { ${makeGeneratorName(name)}, ${makeRulesName(
+    name
+  )} } from "./${makeComponentName(name)}";\n// TemplateImportAnchor`;
 }
 /** Creates the full enum class entry as a string.
  *
@@ -72,27 +87,27 @@ function makeSetupMapEntry(name) {
  * @return string
  * */
 function makeEnumEntry(name) {
-  return `${makeEnumName(name)} = "${name}",\n// TemplateNameAnchor`;
+  return `${makeEnumName(name)} = "${name}",\n  // TemplateNameAnchor`;
 }
 /** Configures pieces for `templates/index.ts` as strings.
  *
- * @param piece {"enum" | "setup"} Type of config piece to create
+ * @param piece {"enum" | "setup" | "import"} Type of config piece to create
  * @param name {string} The name argument from CLI
  * @returns string */
 function makeConfigPiece(piece, name) {
   if (!name || name === "") throw new Error("Name is a required variable");
   switch (piece) {
     case "enum":
-      makeEnumEntry(name);
-      break;
+      return makeEnumEntry(name);
     case "setup":
-      makeSetupMapEntry(name);
-      break;
+      return makeSetupMapEntry(name);
+    case "import":
+      return makeImport(name);
     default:
       throw new Error(`Not a valid config piece: ${piece}`);
   }
 }
-/** Main entry point for making a template. This function uses `template.tsx`
+/** Main entry point for making a template. This function uses `template.txt`
  * in the `code-templates` directory to generate files for `src`. It uses string
  * replacement to customize the templates and add their exports to the templates
  * index file.
@@ -101,15 +116,17 @@ function makeConfigPiece(piece, name) {
  * @param debug {boolean?} Debug mode flag
  * @returns void*/
 function makeTemplate(name, debug) {
+  if (name === undefined || name === "")
+    throw new Error("Cannot use template generator without {name} argument");
   const templateContents = fs.readFileSync(
-    "./code-templates/template.tsx",
+    "./code-templates/template.txt",
     "utf-8"
   );
   const indexContents = fs.readFileSync("./src/templates/index.ts", "utf-8");
 
   const modifiedTemplateContents = templateContents.replace(
     RegExp(/TEMP_NAME/g),
-    "TEST_SUCCEEDED"
+    makeComponentName(name)
   );
   const modifiedIndexContents = indexContents
     .replace(
@@ -117,12 +134,19 @@ function makeTemplate(name, debug) {
       makeConfigPiece("enum", name)
     )
     .replace(
-      makeAnchorRegex("TemplateMapAnchor"),
+      makeAnchorRegex("TemplateMapAnchor", true),
       makeConfigPiece("setup", name)
+    )
+    .replace(
+      makeAnchorRegex("TemplateImportAnchor"),
+      makeConfigPiece("import", name)
     );
 
-  fs.writeFileSync("./cli/_test/indexTest.ts", modifiedIndexContents);
-  fs.writeFileSync("./cli/_test/templateTest.tsx", modifiedTemplateContents);
+  fs.writeFileSync("./src/templates/index.ts", modifiedIndexContents);
+  fs.writeFileSync(
+    `./src/templates/${makeComponentName(name)}.tsx`,
+    modifiedTemplateContents
+  );
 }
 
 module.exports = makeTemplate;

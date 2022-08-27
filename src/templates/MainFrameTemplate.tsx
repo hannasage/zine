@@ -23,10 +23,10 @@ export const MainFrameTemplate: React.FC<BasicTemplateProps> = (props) => {
 const imageLengthRule = maxImagesLengthCheck(1);
 const viewTimeMinimumRule = minimumViewTimeCheck(1000);
 
-export const mainFrameRules = [imageLengthRule, viewTimeMinimumRule];
+export const MainFrameRules = [imageLengthRule, viewTimeMinimumRule];
 
 /* Setup Generator */
-export const mainFrameGenerator = (props: ZinePageConfig) => (
+export const MainFrameGenerator = (props: ZinePageConfig) => (
   <MainFrameTemplate
     images={props.images}
     viewTimeRequirement={props.viewTimeRequirement}

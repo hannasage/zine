@@ -6,9 +6,6 @@ const makeTemplate = require("./generators/make-template");
 function debugMode(options) {
   return options?.debug !== undefined;
 }
-function templateAction(name, options) {
-  return makeTemplate(name, debugMode(options));
-}
 
 program
   .name("Zine CLI")
@@ -22,12 +19,8 @@ program
   .argument("<name>", "The name of your new template")
   .option("-d, --debug", "Show given options on call")
   .description("Create a Zine template and export it from the templates index.")
-  .action(templateAction);
+  .action(function (name, options) {
+    makeTemplate(name, debugMode(options));
+  });
 
-program.parse(process.argv);
-
-const options = program.opts();
-console.log(options);
-if (options.template) {
-  makeTemplate(options.template);
-}
+program.parse();
