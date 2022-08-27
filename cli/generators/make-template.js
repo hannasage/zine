@@ -116,7 +116,7 @@ function makeIndexEntry(piece, name) {
  * @param debug {boolean?} Debug mode flag
  * @returns void*/
 function makeTemplate(name, debug) {
-  if (name === undefined || name === "")
+  if (name === undefined || name.trim() === "")
     throw new Error("Cannot use template generator without {name} argument");
   const templateContents = fs.readFileSync(
     "./code-templates/template.txt",
