@@ -1,0 +1,23 @@
+{
+  "name": "zine-cli",
+  "version": "1.0.0",
+  "description": "A CLI for creating zine components, templates, and features.",
+  "main": "index.js",
+  "bin": {
+    "zine": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "npm i -g && zine test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinhaube/zine/tree/master/cli"
+  },
+  "author": "Kevin Haube",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.4.0"
+  }
+}
