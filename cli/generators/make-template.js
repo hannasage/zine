@@ -32,7 +32,9 @@ function makeEnumName(name) {
  * This is primarily used for building the code blocks below.
  *
  * @example
- * makeComponentName("test-component") === "TestComponent*/
+ * makeComponentName("test-component") === "TestComponent
+ * @param name {string} Name argument from CLI
+ * */
 function makeComponentName(name) {
   function capitalize(word) {
     return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
@@ -41,25 +43,17 @@ function makeComponentName(name) {
   words = words.map((wordInName) => capitalize(wordInName));
   return `${words.join("")}`;
 }
-/**  */
+/** Proxy to {@link makeComponentName} appended by "Generator"
+ * @param name {string} Name argument from CLI
+ * */
 function makeGeneratorName(name) {
   return `${makeComponentName(name)}Generator`;
 }
-/**  */
+/** Proxy to {@link makeComponentName} appended by "Rules"
+ * @param name {string} Name argument from CLI
+ * */
 function makeRulesName(name) {
   return `${makeComponentName(name)}Rules`;
-}
-/** Creates a `TemplateSetup` object as a string.
- *
- * @example
- * "{ generator: MyComponentGenerator, rules: MyGeneratorRules }"
- * @param name {string} Name argument from CLI
- * @returns string
- * */
-function makeTemplateSetup(name) {
-  return `{ generator: ${makeGeneratorName(name)}, rules: ${makeRulesName(
-    name
-  )} }`;
 }
 /** Creates a string to replace the anchor at the end of the TEMPLATE map
  * in `templates/index.ts`
@@ -73,7 +67,13 @@ function makeSetupMapEntry(name) {
     rules: ${makeRulesName(name)},
   }); // TemplateMapAnchor`;
 }
-/**  */
+/** Creates a string to replace the anchor in the Imports section of the
+ * templates index file
+ *
+ * @example
+ * `import { MyTemplateGenerator, MyTemplateRules } from "./MyTemplate"`
+ * @param name {string} Name argument from CLI
+ * */
 function makeImport(name) {
   return `import { ${makeGeneratorName(name)}, ${makeRulesName(
     name
