@@ -74,7 +74,7 @@ function makeSetupMapEntry(name) {
  * `import { MyTemplateGenerator, MyTemplateRules } from "./MyTemplate"`
  * @param name {string} Name argument from CLI
  * */
-function makeImport(name) {
+function makeImportEntry(name) {
   return `import { ${makeGeneratorName(name)}, ${makeRulesName(
     name
   )} } from "./${makeComponentName(name)}";\n// TemplateImportAnchor`;
@@ -94,7 +94,7 @@ function makeEnumEntry(name) {
  * @param piece {"enum" | "setup" | "import"} Type of config piece to create
  * @param name {string} The name argument from CLI
  * @returns string */
-function makeConfigPiece(piece, name) {
+function makeIndexEntry(piece, name) {
   if (!name || name === "") throw new Error("Name is a required variable");
   switch (piece) {
     case "enum":
@@ -102,7 +102,7 @@ function makeConfigPiece(piece, name) {
     case "setup":
       return makeSetupMapEntry(name);
     case "import":
-      return makeImport(name);
+      return makeImportEntry(name);
     default:
       throw new Error(`Not a valid config piece: ${piece}`);
   }
@@ -131,15 +131,15 @@ function makeTemplate(name, debug) {
   const modifiedIndexContents = indexContents
     .replace(
       makeAnchorRegex("TemplateNameAnchor"),
-      makeConfigPiece("enum", name)
+      makeIndexEntry("enum", name)
     )
     .replace(
       makeAnchorRegex("TemplateMapAnchor", true),
-      makeConfigPiece("setup", name)
+      makeIndexEntry("setup", name)
     )
     .replace(
       makeAnchorRegex("TemplateImportAnchor"),
-      makeConfigPiece("import", name)
+      makeIndexEntry("import", name)
     );
 
   fs.writeFileSync("./src/templates/index.ts", modifiedIndexContents);
