@@ -80,28 +80,15 @@ You will be prompted for a type, either a `logic` or `block` component. Anything
 
 ### Add a Template to Zine
 
-To accompany a template file, there's a setup file. This will include my template rules, such as `maxImagesLengthCheck(1)`, which tells the templating system that this template only takes one image. It'll also include a generator function which stands to take in the page config, and pass the props into the component, returning the `JSX.Element`, fully hydrated.
+> Requires use of `zine-cli`: see setup instructions.
 
-```typescript jsx
-export const mainFrameGenerator = (props: ZinePageConfig) => (
-  <MainFrameTemplate
-    images={props.images}
-    viewTimeRequirement={props.viewTimeRequirement}
-  />
-);
+To set up a new template, I use the new `zine template <name>` cli command. Names **must** follow a hyphenated alphebetical name structure. (e.g. `sample-name`) The template generator handles appending `template` to your desired template name.
+
+```
+zine template awesome
 ```
 
-Once your rules array and generator function are exported from the file, I'll head over into `templates/index.ts` and add my setup to the `TEMPLATES` export. This exported map uses a key from the `TemplateNames` enumerated class and matches it to a setup. A `Template` object, when initialized, will seek out the right template setup, and throw if it cannot find it in this map.
-
-```typescript
-const myTemplateSetup: TemplateSetup = { 
-    rules: myTemplateRules, 
-    generator: myTemplateGenerator 
-}
-
-TEMPLATES.set(TemplateNames.MY_TEMPLATE, myTemplateSetup);
-```
-
+This generates `src/templatesAwesomeTemplate.tsx`, and exports the setup from `src/templates/index.ts`. Inside the new template file, there is an empty rules array, a premade generator, and an empty template.
 ---
 
 ## The `/framework` directory:
