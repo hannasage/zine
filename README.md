@@ -128,3 +128,14 @@ Returning hooks, hooks that require being stored as variables, aren't necessaril
 Rules are the _most_ fun part of this system, to me. These replace the need for conditionals inside templates, but best of all, they're _suuuuper_ customizable. I could run _deep_ checks on data before rendering if I wanted. I could validate props against network data, something that'd be super messy when built into a `react` component with an effect hook.
 
 Future considerations for rules are always flying through my head. One formidable challenge would be measuring whether an image is portrait or landscape and defining a rule around that.
+
+
+## Setup CLI
+
+I decided to build a cli to assist in the generation of new templates, components, and extensions. It's built using commonJS in a node environment using the `commander` npm package to run it as a cli.
+
+To set up:
+
+```
+yarn cli:init
+```
