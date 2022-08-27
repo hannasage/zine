@@ -55,6 +55,10 @@ function makeGeneratorName(name) {
 function makeRulesName(name) {
   return `${makeComponentName(name)}Rules`;
 }
+/** Proxy to {@link makeComponentName} appended by "Template" */
+function makeTemplateName(name) {
+  return `${makeComponentName(name)}Template`;
+}
 /** Creates a string to replace the anchor at the end of the TEMPLATE map
  * in `templates/index.ts`
  *
@@ -77,7 +81,7 @@ function makeSetupMapEntry(name) {
 function makeImportEntry(name) {
   return `import { ${makeGeneratorName(name)}, ${makeRulesName(
     name
-  )} } from "./${makeComponentName(name)}";\n// TemplateImportAnchor`;
+  )} } from "./${makeTemplateName(name)}";\n// TemplateImportAnchor`;
 }
 /** Creates the full enum class entry as a string.
  *
@@ -144,7 +148,7 @@ function makeTemplate(name, debug) {
 
   fs.writeFileSync("./src/templates/index.ts", modifiedIndexContents);
   fs.writeFileSync(
-    `./src/templates/${makeComponentName(name)}.tsx`,
+    `./src/templates/${makeTemplateName(name)}.tsx`,
     modifiedTemplateContents
   );
 }
