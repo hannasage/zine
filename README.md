@@ -80,7 +80,7 @@ You will be prompted for a type, either a `logic` or `block` component. Anything
 
 ### Add a Template to Zine
 
-> Requires use of `zine-cli`: see setup instructions.
+> Requires use of `zine-cli`: [see this section](#setup-cli) for details.
 
 To set up a new template, I use the new `zine template <name>` cli command. Names **must** follow a hyphenated alphebetical name structure. (e.g. `sample-name`) The template generator handles appending `template` to your desired template name.
 
