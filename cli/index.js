@@ -3,13 +3,26 @@ const { program } = require("commander");
 
 const makeTemplate = require("./generators/make-template");
 
+function debugMode(options) {
+  return options?.debug !== undefined;
+}
+function templateAction(name, options) {
+  return makeTemplate(name, debugMode(options));
+}
+
 program
-  .option("-d, --debug", "Show given options on call")
-  .option("-t, --template", "Create a new Zine template")
-  .argument("<name>", "Desired name of the template")
+  .name("Zine CLI")
   .description(
-    "Create a Zine template and export it from the templates index."
-  );
+    "Used to generate templates, components, and features for the Zine ecosystem."
+  )
+  .version("1.0.0");
+
+program
+  .command("template")
+  .argument("<name>", "The name of your new template")
+  .option("-d, --debug", "Show given options on call")
+  .description("Create a Zine template and export it from the templates index.")
+  .action(templateAction);
 
 program.parse(process.argv);
 

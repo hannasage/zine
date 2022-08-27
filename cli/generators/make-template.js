@@ -1,15 +1,20 @@
 const fs = require("fs");
-/** Create a dynamic anchor regex. Anchors are easier ways to access the end
- * of object creators (i.e. `.set(...); //anchor`) so you can replace the anchor
- * with the desired string
+/** Creates a regex to find an anchor (i.e. `// MyAnchor`). Anchors must have
+ * no whitespace between words. Matches are case-sensitive, but any case is
+ * allowed.
  *
  * @example
- * ANCHOR_REGEX("TemplateMapAnchor") == //TemplateMapAnchor
+ * makeAnchorRegex("TemplateNameAnchor") === "// TemplateNameAnchor"
+ * makeAnchorRegex("TemplateMapAnchor", true) === "; // TemplateMapAnchor"
  * @param anchorTerm {string} The term in your anchor comment (no whitespace)
+ * @param includeSemicolon {boolean?} Include a semicolon and trailing whitespace in the regex
  * @return RegExp
  * */
-function ANCHOR_REGEX(anchorTerm) {
-  return RegExp(`;\\s\\/\\/${anchorTerm.trim()}`);
+function makeAnchorRegex(anchorTerm, includeSemicolon) {
+  if (includeSemicolon) {
+    return RegExp(`;\\s\\/\\/\\s${anchorTerm.trim()}`);
+  }
+  return RegExp(`\\/\\/\\s${anchorTerm.trim()}`);
 }
 /** Makes an `enum` key as a string.
  *
@@ -20,8 +25,20 @@ function ANCHOR_REGEX(anchorTerm) {
  * */
 function makeEnumName(name) {
   const enumKey = name.toUpperCase();
-  if (enumKey.includes("-")) return enumKey.replaceAll("-", "_");
+  if (enumKey.includes("-")) return enumKey.replace("-", "_");
   return enumKey;
+}
+/** Make name arg into component name. Component names are templated in new files.
+ * This is primarily used for building the code blocks below.
+ *
+ * @example
+ * makeComponentName("test-component") === "TestComponent*/
+function makeComponentName(name) {
+  function capitalize(word) {
+    return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
+  }
+  const words = name.split("-");
+  return `${words.map((wordInName) => capitalize(wordInName))}`;
 }
 /** Creates a `TemplateSetup` object as a string.
  *
@@ -31,9 +48,9 @@ function makeEnumName(name) {
  * @returns string
  * */
 function makeTemplateSetup(name) {
-  function template(generatorKey, rulesKey) {
-    return `{ generator: ${generatorKey}, rules: ${rulesKey} }`;
-  }
+  return `{ generator: ${makeComponentName(
+    name
+  )}Generator, rules: ${makeComponentName(name)}Rules }`;
 }
 /** Creates a string to replace the anchor at the end of the TEMPLATE map
  * in `templates/index.ts`
@@ -42,10 +59,10 @@ function makeTemplateSetup(name) {
  * @return string
  * */
 function makeSetupMapEntry(name) {
-  return `.set(
-    ${makeEnumName(name)},
-    ${makeTemplateSetup()}
-    ); //TemplateMapAnchor`;
+  return `.set(\n
+    ${makeEnumName(name)},\n
+    ${makeTemplateSetup(name)}\n
+    ); // TemplateMapAnchor`;
 }
 /** Creates the full enum class entry as a string.
  *
@@ -55,7 +72,7 @@ function makeSetupMapEntry(name) {
  * @return string
  * */
 function makeEnumEntry(name) {
-  return `${makeEnumName(name)} = "${name}"}`;
+  return `${makeEnumName(name)} = "${name}",\n// TemplateNameAnchor`;
 }
 /** Configures pieces for `templates/index.ts` as strings.
  *
@@ -81,8 +98,9 @@ function makeConfigPiece(piece, name) {
  * index file.
  *
  * @param name {string} The name argument from CLI
+ * @param debug {boolean?} Debug mode flag
  * @returns void*/
-function makeTemplate(name) {
+function makeTemplate(name, debug) {
   const templateContents = fs.readFileSync(
     "./code-templates/template.tsx",
     "utf-8"
@@ -93,10 +111,15 @@ function makeTemplate(name) {
     RegExp(/TEMP_NAME/g),
     "TEST_SUCCEEDED"
   );
-  const modifiedIndexContents = indexContents.replace(
-    ANCHOR_REGEX("anchor"),
-    makeConfigPiece()
-  );
+  const modifiedIndexContents = indexContents
+    .replace(
+      makeAnchorRegex("TemplateNameAnchor"),
+      makeConfigPiece("enum", name)
+    )
+    .replace(
+      makeAnchorRegex("TemplateMapAnchor"),
+      makeConfigPiece("setup", name)
+    );
 
   fs.writeFileSync("./cli/_test/indexTest.ts", modifiedIndexContents);
   fs.writeFileSync("./cli/_test/templateTest.tsx", modifiedTemplateContents);

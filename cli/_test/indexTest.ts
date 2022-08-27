@@ -8,7 +8,7 @@ import { mainFrameGenerator, mainFrameRules } from "./MainFrameTemplate";
 export enum TemplateName {
   SAMPLE = "sample",
   MAINFRAME = "main-frame",
-  // TemplateNameAnchor
+  undefined
 }
 
 /** Main export for the `templates` module. Any other module using a template
@@ -17,4 +17,4 @@ export enum TemplateName {
 export const TEMPLATES = new Map<TemplateName, TemplateSetup>().set(
   TemplateName.MAINFRAME,
   { generator: mainFrameGenerator, rules: mainFrameRules }
-); // TemplateMapAnchor
+); undefined

@@ -1,13 +1,24 @@
-// Supports 1 image file
 import React from "react";
 
 import {
+  BasicTemplateProps,
   maxImagesLengthCheck,
   minimumViewTimeCheck,
   ZinePageConfig,
-} from "../../framework";
+} from "../framework";
+import { Container, Frame, Image } from "../components";
 
-import { MainFrameTemplate } from "./MainFrameTemplate";
+/** TEMPLATE: A single image in a frame. */
+export const MainFrameTemplate: React.FC<BasicTemplateProps> = (props) => {
+  return (
+    <Container>
+      <Frame width={87} height={87}>
+        <Image src={`${process.env.REACT_APP_PUBLIC_URL}${props.images[0]}`} />
+      </Frame>
+    </Container>
+  );
+};
+
 /* Setup Rules */
 const imageLengthRule = maxImagesLengthCheck(1);
 const viewTimeMinimumRule = minimumViewTimeCheck(1000);
