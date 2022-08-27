@@ -89,6 +89,7 @@ zine template awesome
 ```
 
 This generates `src/templatesAwesomeTemplate.tsx`, and exports the setup from `src/templates/index.ts`. Inside the new template file, there is an empty rules array, a premade generator, and an empty template.
+
 ---
 
 ## The `/framework` directory:
