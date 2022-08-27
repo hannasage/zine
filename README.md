@@ -80,15 +80,17 @@ You will be prompted for a type, either a `logic` or `block` component. Anything
 
 ### Add a Template to Zine
 
-> Requires use of `zine-cli`: [see this section](#setup-cli) for details.
+> Requires use of `zine-cli`: [Setup CLI](#setup-cli)
 
-To set up a new template, I use the new `zine template <name>` cli command. Names **must** follow a hyphenated alphebetical name structure. (e.g. `sample-name`) The template generator handles appending `template` to your desired template name.
+To set up a new template, I use the new `zine template <name>` cli command. Names **must** follow be strictly alphabetical and extended names must be hyphenated. The template generator handles appending `template` to your desired template name.
 
 ```
-zine template awesome
+zine template awesome sauce ❌
+zine template awesomeSauce ❌
+zine template awesome-sauce ✅
 ```
 
-This generates `src/templatesAwesomeTemplate.tsx`, and exports the setup from `src/templates/index.ts`. Inside the new template file, there is an empty rules array, a premade generator, and an empty template.
+This generates `src/templates/AwesomeSauceTemplate.tsx`, and exports the setup from `src/templates/index.ts`. Inside the new template file, there is an empty rules array, a premade generator, and an empty template.
 
 ---
 
