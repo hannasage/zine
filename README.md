@@ -3,6 +3,7 @@ A micro front-end for viewing my photography the way I intended.
 
 - [Templates and components](#templates-and-components)
 - [The framework directory](#the-framework-directory)
+- [Zine CLI](#setup-cli)
 
 ## Overview
 
