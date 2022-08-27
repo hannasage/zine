@@ -1,7 +1,7 @@
 import React from "react";
 
-interface COMPONENT_NAMEProps {}
-/** Include JSDOC for COMPONENT_NAME */
-export const COMPONENT_NAME: React.FC<COMPONENT_NAMEProps> = ({}) => {
+interface TEMP_NAMEProps {}
+/** Include JSDOC for TEMP_NAME */
+export const TEMP_NAME: React.FC<TEMP_NAMEProps> = ({}) => {
   return <></>;
 };

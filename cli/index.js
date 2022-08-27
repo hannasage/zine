@@ -5,8 +5,8 @@ const makeTemplate = require("./generators/make-template");
 const {
   makeComponent,
   invalidTypeCheck,
-  debugOptions,
 } = require("./generators/make-coponent");
+const { debugOptions } = require("./src/debug");
 
 function debugMode(options) {
   return options?.debug !== undefined;

@@ -2,9 +2,6 @@ const fs = require("fs");
 
 const {
   makeEnumName,
-  makeGeneratorName,
-  makeRulesName,
-  makeTemplateName,
   makeComponentName,
   makeAnchorRegex,
   NAME_REGEX,
@@ -16,6 +13,22 @@ const ENUM_ANCHOR = "TemplateEnumAnchor";
 const SETUP_ANCHOR = "TemplateSetupAnchor";
 const IMPORT_ANCHOR = "TemplateImportAnchor";
 
+/** Proxy to {@link makeComponentName} appended by "Generator"
+ * @param name {string} Name argument from CLI
+ * */
+function makeGeneratorName(name) {
+  return `${makeComponentName(name)}Generator`;
+}
+/** Proxy to {@link makeComponentName} appended by "Rules"
+ * @param name {string} Name argument from CLI
+ * */
+function makeRulesName(name) {
+  return `${makeComponentName(name)}Rules`;
+}
+/** Proxy to {@link makeComponentName} appended by "Template" */
+function makeTemplateName(name) {
+  return `${makeComponentName(name)}Template`;
+}
 /** Creates a string to replace the anchor at the end of the TEMPLATE map
  * in `templates/index.ts`
  *
@@ -57,7 +70,8 @@ function makeEnumEntry(name) {
  *
  * @param name {string} The name argument from CLI
  * @param debug {boolean?} Debug mode flag
- * @returns void*/
+ * @returns void
+ * */
 function makeTemplate(name, debug) {
   // New template's file name
   const fileName = `${makeTemplateName(name)}.tsx`;

@@ -44,27 +44,8 @@ function makeComponentName(name) {
   words = words.map((wordInName) => capitalize(wordInName));
   return `${words.join("")}`;
 }
-/** Proxy to {@link makeComponentName} appended by "Generator"
- * @param name {string} Name argument from CLI
- * */
-function makeGeneratorName(name) {
-  return `${makeComponentName(name)}Generator`;
-}
-/** Proxy to {@link makeComponentName} appended by "Rules"
- * @param name {string} Name argument from CLI
- * */
-function makeRulesName(name) {
-  return `${makeComponentName(name)}Rules`;
-}
-/** Proxy to {@link makeComponentName} appended by "Template" */
-function makeTemplateName(name) {
-  return `${makeComponentName(name)}Template`;
-}
 
 module.exports = {
-  makeGeneratorName,
-  makeRulesName,
-  makeTemplateName,
   makeComponentName,
   makeEnumName,
   makeAnchorRegex,

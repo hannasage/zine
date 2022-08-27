@@ -1,4 +1,4 @@
 import styled from "styled-components";
 
-/** Include JSDOC for COMPONENT_NAME */
-export const COMPONENT_NAME = styled.div``;
+/** Include JSDOC for TEMP_NAME */
+export const TEMP_NAME = styled.div``;
