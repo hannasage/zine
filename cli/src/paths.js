@@ -1,8 +1,8 @@
 /* All paths relative from Zine project root */
 
 const TEMPLATE_TXT = "./cli/code-templates/template.txt";
-const BLOCK_TXT = "./cli/code-templates/block.ts";
-const LOGIC_TXT = "./cli/code-templates/logic.tsx";
+const BLOCK_TXT = "./cli/code-templates/block.txt";
+const LOGIC_TXT = "./cli/code-templates/logic.txt";
 
 /** Returns the relative path with debug override
  *
