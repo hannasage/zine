@@ -1,9 +1,9 @@
 import React from "react";
 
-import { RuleFunction, ZinePageConfig } from "../framework";
+import { RuleFunction, ZinePageConfig, BasicTemplateProps } from "../framework";
 
 /* Template Component */
-export const TEMP_NAMETemplate = () => {
+export const TEMP_NAMETemplate: React.FC<BasicTemplateProps> = () => {
   return <></>;
 };
 
