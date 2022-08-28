@@ -29,7 +29,7 @@ system that validates props from the server and renders hydrated components.
 
 ### Stack
 
-- Language: `TypeScript`
+- Language(s): `TypeScript`, `JavaScript`
 - UI: `react` via `create-react-app`
 - Styling: `styled-components`
 - CLI: `commander` to run `commonJS` in the terminal
