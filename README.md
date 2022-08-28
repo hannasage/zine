@@ -110,4 +110,4 @@ zine extension -t rule newRule ❌
 zine extension -t rule new-rule ✅
 ```
 
-If creating a rule, it'll output the new file in `framework/extension-rules`, and likewise it'll output to `framework/extension-hooks` for hooks.
+If creating a rule, it'll output the new file in `framework/extension-rules`, and likewise it'll output to `framework/extension-hooks` for hooks. In both cases, the exports will be generated inside of `framework/index.ts`.
