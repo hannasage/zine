@@ -65,6 +65,7 @@ yarn cli:init
 
 - [`component <name> -t <type>`](#add-a-component-to-zine) - Generates a new Zine component
 - [`template <name>`](#add-a-template-to-zine) - Generates a new Zine template
+- [`extension <name> -t <type>`](#add-an-extension-to-zine) - Generates a new extension (rule or hook)
 
 ### Debugging
 
