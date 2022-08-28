@@ -4,6 +4,7 @@ const TEMPLATE_TXT = "./cli/code-templates/template.txt";
 const BLOCK_TXT = "./cli/code-templates/block.txt";
 const LOGIC_TXT = "./cli/code-templates/logic.txt";
 const RULE_TXT = "./cli/code-templates/rule.txt";
+const HOOK_TXT = "./cli/code-templates/hook.txt";
 
 /** Returns the relative path with debug override
  *
@@ -32,5 +33,6 @@ module.exports = {
   BLOCK_TXT,
   LOGIC_TXT,
   RULE_TXT,
+  HOOK_TXT,
   path,
 };
