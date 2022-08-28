@@ -31,7 +31,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:write": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
-    "zine:component": "./zine.sh component",
     "cli:init": "cd cli && yarn link && cd ../ && yarn link zine-cli"
   },
   "eslintConfig": {

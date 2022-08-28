@@ -2,6 +2,11 @@
 const { program } = require("commander");
 
 const makeTemplate = require("./generators/make-template");
+const {
+  makeComponent,
+  invalidTypeCheck,
+} = require("./generators/make-coponent");
+const { debugOptions } = require("./src/debug");
 
 function debugMode(options) {
   return options?.debug !== undefined;
@@ -16,11 +21,24 @@ program
 
 program
   .command("template")
-  .argument("<name>", "The name of your new template")
-  .option("-d, --debug", "Show given options on call")
   .description("Create a Zine template and export it from the templates index.")
+  .argument("<name>", "The name of your new template")
+  .option("-d, --debug", "Enable debug mode")
   .action(function (name, options) {
     makeTemplate(name, debugMode(options));
+  });
+
+program
+  .command("component")
+  .description("Create a Zine component and export it")
+  .argument("<name>", "The name of your new component")
+  .requiredOption("-t, --type <type>", "Define component type, block or logic")
+  .option("-d, --debug", "Enable debug mode")
+  .action(function (name, options) {
+    const { type, debug } = options;
+    debugOptions(options);
+    invalidTypeCheck(type);
+    makeComponent(type, name, debug);
   });
 
 program.parse();
