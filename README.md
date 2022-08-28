@@ -16,7 +16,7 @@ Until _that_ day, what `Zine` _does_ do is creates an easy framework to work wit
 
 >🔸**WIP** -  In forthcoming work, I will be building tools to create a zine, and deploy the updated front-end via the CLI. 
 
-## Engineering 🧑🏻‍💻
+## Engineering
 
 ### Stack
 
@@ -51,7 +51,7 @@ When a rule is added to the exported array of rules in my template file, I can r
 
 ---
 
-## Zine CLI ⚙️
+## Zine CLI
 
 I decided to build a cli to assist in the generation of new templates, components, and extensions. It's built using commonJS in a node environment using the `commander` npm package to run it as a cli.
 
