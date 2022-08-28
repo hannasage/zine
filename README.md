@@ -149,8 +149,8 @@ yarn cli:init
 
 ### Commands
 
-- [`template <name>`](#add-a-template-to-zine) - Generates a new Zine template
 - [`component <name> -t <type>`](#add-a-component-to-zine) - Generates a new Zine component
+- [`template <name>`](#add-a-template-to-zine) - Generates a new Zine template
 
 ### Debugging
 
