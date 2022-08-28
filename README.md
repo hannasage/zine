@@ -12,7 +12,7 @@ I'm exhausted by photography being crowded in an algorithmically-curated feed, l
 
 Much like a physical book will always be better than a _Kindle_ 🤮, the `Zine` framework will always be inferior to printing a zine and sharing it with your friends. I fully intend to find a way to bridge the gap, and turn `Zine` into my own automated printing pipeline.
 
-Until _that_ day, what `Zine` _does_ do is creates an easy framework to work within when designing and deploying your online zine. With the included [CLI](#setup-cli), I can extend the app endlessly by creating new templates, new extensions, and new components within my framework ✨ _a u t o m a g i c a l l y_ ✨!
+Until _that_ day, what `Zine` _does_ do is creates an easy framework to work within when designing and deploying my online zine. With the included [CLI](#setup-cli), I can extend the app endlessly by creating new templates, new extensions, and new components within my framework ✨ _a u t o m a g i c a l l y_ ✨!
 
 >🔸**WIP** -  In forthcoming work, I will be building tools to create a zine, and deploy the updated front-end via the CLI. 
 
@@ -47,7 +47,7 @@ The intent is to deliver a zine over the air. The `ZinePageConfig` is the expect
 
 To subvert the need for conditional checks inside templates, leading to bloated JSX, I opted to build a safe templating system. Instead of writing a condition in my template, I write a Rule Function! This will throw a nice error for me whenever my rule is broken, with a customizable message out of the box.
 
-When a rule is added to the exported array of rules in my template file, I can rest assured a prop is present, or contains only an acceptable value, and write your template without worry.
+When a rule is added to the exported array of rules in my template file, I can rest assured a prop is present, or contains only an acceptable value, and write my template without worry.
 
 ---
 
@@ -69,7 +69,7 @@ yarn cli:init
 
 ### Debugging
 
-You can utilize the `-d` or `--debug` flag with any command to access debugging features. The `debug.js` module has functions that act as debug features.
+To unlock debug features, utilize the `-d` or `--debug` flag with any command. Debug features are exported from the `debug.js` module for use in all modules.
 
 ### Add a Component to Zine
 
