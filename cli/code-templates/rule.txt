@@ -1,0 +1,13 @@
+import { RuleFunction, RuleGenerator } from "../Template";
+import InvalidTemplatePropsError from "../errors/InvalidTemplatePropsError";
+import ZinePageConfig from "../configs/ZinePageConfig";
+
+/** RULE: Describe your rule
+ * @throws {InvalidTemplatePropsError}
+ * */
+const TEMP_NAMEMessage = () => ``;
+export const TEMP_NAMECheck: RuleGenerator =
+  (): RuleFunction =>
+  (config: ZinePageConfig): void => {
+    if (config) throw new InvalidTemplatePropsError(TEMP_NAMEMessage());
+  };

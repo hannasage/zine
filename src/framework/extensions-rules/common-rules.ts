@@ -1,6 +1,6 @@
-import { InvalidTemplatePropsError } from "../errors";
-import { ZinePageConfig } from "../configs";
 import { RuleFunction, RuleGenerator } from "../Template";
+import InvalidTemplatePropsError from "../errors/InvalidTemplatePropsError";
+import ZinePageConfig from "../configs/ZinePageConfig";
 
 const maxImagesLengthMessage = (actual: number, supported: number) =>
   `This template only supports ${supported} image, received: ${actual}`;
