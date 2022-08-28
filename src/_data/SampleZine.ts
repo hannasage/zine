@@ -2,9 +2,9 @@ import { ZinePageConfig } from "../framework";
 import { TemplateName } from "../templates";
 
 const page1 = new ZinePageConfig({
-  images: ["/images/img002.jpg"],
+  images: ["/images/img002.jpg", "/images/img012.jpg", "/images/img020.jpg"],
   viewTimeRequirement: 10000,
-  templateId: TemplateName.MAIN_FRAME,
+  templateId: TemplateName.THREES_FRAME,
 });
 
 const page2 = new ZinePageConfig({

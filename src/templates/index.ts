@@ -2,12 +2,14 @@
 import { TemplateSetup } from "../framework";
 
 import { MainFrameGenerator, MainFrameRules } from "./MainFrameTemplate";
+import { ThreesFrameGenerator, ThreesFrameRules } from "./ThreesFrameTemplate";
 // TemplateImportAnchor
 
 /** Keys to the TEMPLATES array. */
 export enum TemplateName {
   SAMPLE = "sample",
   MAIN_FRAME = "main-frame",
+  THREES_FRAME = "threes-frame",
   // TemplateEnumAnchor
 }
 
@@ -18,4 +20,8 @@ export const TEMPLATES = new Map<TemplateName, TemplateSetup>()
   .set(TemplateName.MAIN_FRAME,{
     generator: MainFrameGenerator,
     rules: MainFrameRules,
+  })
+	.set(TemplateName.THREES_FRAME, {
+    generator: ThreesFrameGenerator,
+    rules: ThreesFrameRules,
   }); // TemplateSetupAnchor
