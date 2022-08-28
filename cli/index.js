@@ -7,6 +7,7 @@ const {
   invalidTypeCheck,
 } = require("./generators/make-coponent");
 const { debugOptions } = require("./src/debug");
+const { makeRule } = require("./generators/make-rule");
 
 function debugMode(options) {
   return options?.debug !== undefined;
@@ -39,6 +40,17 @@ program
     debugOptions(options);
     invalidTypeCheck(type);
     makeComponent(type, name, debug);
+  });
+
+program
+  .command("rule")
+  .description("Create a Zine template rule and export it")
+  .argument("<name>", "Name of the rule")
+  .option("-d, --debug", "Enable debug mode")
+  .action(function (name, options) {
+    const { debug } = options;
+    debugOptions(debug);
+    makeRule(name, debug);
   });
 
 program.parse();

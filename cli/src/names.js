@@ -33,15 +33,20 @@ function makeEnumName(name) {
  * This is primarily used for building the code blocks below.
  *
  * @example
- * makeComponentName("test-component") === "TestComponent
+ * makeComponentName("test-component") === "TestComponent"
+ * makeComponentName("test-function", true) === "testFunction"
  * @param name {string} Name argument from CLI
+ * @param camelCase {boolean?} Whether to capitalize first letter or not
  * */
-function makeComponentName(name) {
+function makeComponentName(name, camelCase) {
   function capitalize(word) {
     return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
   }
   let words = name.split("-");
-  words = words.map((wordInName) => capitalize(wordInName));
+  words = words.map((wordInName, index) => {
+    if (index === 0 && camelCase) return wordInName;
+    return capitalize(wordInName);
+  });
   return `${words.join("")}`;
 }
 
