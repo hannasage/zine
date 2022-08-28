@@ -1,7 +1,7 @@
 import { TemplateName, TEMPLATES } from "../templates";
 
-import { ZinePageConfig } from "./configs";
-import { UndefinedSetupError } from "./errors";
+import ZinePageConfig from "./configs/ZinePageConfig";
+import UndefinedSetupError from "./errors/UndefinedSetupError";
 
 /** Function that validates props for a template */
 export type RuleFunction = (config: ZinePageConfig) => void;
