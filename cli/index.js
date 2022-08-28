@@ -7,7 +7,10 @@ const {
   invalidTypeCheck,
 } = require("./generators/make-coponent");
 const { debugOptions } = require("./src/debug");
-const { makeRule } = require("./generators/make-extension");
+const {
+  validateExtensionOptions,
+  makeExtension,
+} = require("./generators/make-extension");
 
 function debugMode(options) {
   return options?.debug !== undefined;
@@ -51,7 +54,8 @@ program
   .action(function (name, options) {
     const { debug, type } = options;
     debugOptions(debug);
-    makeRule(name, type, debug);
+    validateExtensionOptions(options);
+    makeExtension(name, type, debug);
   });
 
 program.parse();

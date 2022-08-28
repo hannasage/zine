@@ -8,6 +8,12 @@ const {
 const { path, RULE_TXT, HOOK_TXT } = require("../src/paths");
 const { debugLog } = require("../src/debug");
 
+function validateExtensionOptions(options) {
+  const { type } = options;
+  if (!type || (type !== "hook" && type !== "rule"))
+    throw Error(`Invalid type: ${type}. Valid extension types: rule, hook`);
+}
+
 const GENERATOR = "framework";
 const RULES_FOLDER = "extensions-rules";
 const HOOKS_FOLDER = "extensions-hooks";
@@ -102,5 +108,6 @@ function makeExtension(name, type, debug) {
 }
 
 module.exports = {
-  makeRule: makeExtension,
+  makeExtension,
+  validateExtensionOptions,
 };
