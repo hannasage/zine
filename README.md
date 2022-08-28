@@ -1,8 +1,7 @@
 # Zine 
 A micro front-end for creating onling photography zines to share.
 
-- [Templates and components](#templates-and-components)
-- [The framework directory](#the-framework-directory)
+- [Engineering](#engineering)
 - [Zine CLI](#zine-cli)
 
 ## Overview 🔍
