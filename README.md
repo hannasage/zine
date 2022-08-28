@@ -1,12 +1,6 @@
 # Zine 
 A micro front-end for creating onling photography zines to share.
 
-[![Ruby][Ruby.js]][Ruby-url]
-
-[![Rails][Rails.js]][Rails-url]
-
-[![Postgres][Postgres.js]][Postgres-url]
-
 - [Engineering](#engineering)
 - [Zine CLI](#zine-cli)
 
