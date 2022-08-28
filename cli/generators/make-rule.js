@@ -19,14 +19,17 @@ const EXPORT_ANCHOR = "RuleExportAnchor";
  * */
 function makeRuleImport(name) {
   const componentName = makeComponentName(name, true);
-  return `import { ${componentName} } from "./${FOLDER}/${componentName}";\n// ${IMPORT_ANCHOR}`;
+  return `import { ${componentName}Check } from "./${FOLDER}/${componentName}";\n// ${IMPORT_ANCHOR}`;
 }
 /** Generates the export statement as a string
  *
  * @param name {string} Name argument from CLI
  * */
 function makeRuleExport(name) {
-  return `export { ${makeComponentName(name, true)} };\n// ${EXPORT_ANCHOR}`;
+  return `export { ${makeComponentName(
+    name,
+    true
+  )}Check };\n// ${EXPORT_ANCHOR}`;
 }
 /** Main entry point for rule generation.
  * @param name {string} Name argument from CLI
