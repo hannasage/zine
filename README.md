@@ -71,13 +71,16 @@ For context, here's that page configuration from the server:
 
 ### Add a Component to Zine
 
-To add a new component to `Zine`, use the following command from the root project directory:
+> Requires use of `zine-cli`: [Setup CLI](#setup-cli)
+
+To add a component to Zine, I can use the new `zine component <name>` command. The required `-t` or `--type` flag is how I indicate whether I want the block or the logic component template. Names **must** follow be strictly alphabetical and extended names must be hyphenated.
 
 ```
-yarn zine:component
+zine component --type logic myNewThing ❌
+zine component --type logic my-new-thing ✅
 ```
 
-You will be prompted for a type, either a `logic` or `block` component. Anything visual should follow the rule that if it _can_ be a block, it _should_ be a block. A logic component is a tsx file that serves as a logical layer of the app. For example, `ZinePage` handles effects and prop validation, while the Template system handles rendering the template composed of blocks.
+This generates a component file in the proper subdirectory with the filename structure, following the above example input, of `MyNewThing.ts` or `MyNewThing.tsx`. It'll also add the exports to `components/index.ts`
 
 ### Add a Template to Zine
 
@@ -86,12 +89,11 @@ You will be prompted for a type, either a `logic` or `block` component. Anything
 To set up a new template, I use the new `zine template <name>` cli command. Names **must** follow be strictly alphabetical and extended names must be hyphenated. The template generator handles appending `template` to your desired template name.
 
 ```
-zine template awesome sauce ❌
 zine template awesomeSauce ❌
 zine template awesome-sauce ✅
 ```
 
-This generates `src/templates/AwesomeSauceTemplate.tsx`, and exports the setup from `src/templates/index.ts`. Inside the new template file, there is an empty rules array, a premade generator, and an empty template.
+This generates `/AwesomeSauceTemplate.tsx`, and exports the setup from `templates/index.ts`. Inside the new template file, there is an empty rules array, a pre-made generator, and an empty template.
 
 ---
 
@@ -147,3 +149,8 @@ yarn cli:init
 ### Commands
 
 - [`template <name>`](#add-a-template-to-zine) - Generates a new Zine template
+- [`component <name> -t <type>`](#add-a-component-to-zine) - Generates a new Zine component
+
+### Debugging
+
+You can utilize the `-d` or `--debug` flag with any command to access debugging features. The `debug.js` module has functions that act as debug features.
