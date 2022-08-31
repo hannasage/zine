@@ -5,6 +5,7 @@ import PageProvider, { usePageContext } from "./logic/PageProvider";
 import TemplateErrorBoundary from "./logic/TemplateErrorBoundary";
 import { Zine } from "./logic/Zine";
 import { ZinePage } from "./logic/ZinePage";
+import { ScrollContainer } from "./block/ScrollContainer";
 // ImportAnchor
 
 export { Frame };
@@ -14,4 +15,5 @@ export { PageProvider, usePageContext };
 export { TemplateErrorBoundary };
 export { Zine };
 export { ZinePage };
+export { ScrollContainer };
 // ExportAnchor

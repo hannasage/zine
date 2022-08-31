@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { ZinePageConfig } from "../configs";
+import ZinePageConfig from "../configs/ZinePageConfig";
 
 export interface PageFeatureController {
   availablePages: ZinePageConfig[];

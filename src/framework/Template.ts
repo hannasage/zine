@@ -1,3 +1,5 @@
+import { MutableRefObject } from "react";
+
 import { TemplateName, TEMPLATES } from "../templates";
 
 import ZinePageConfig from "./configs/ZinePageConfig";
@@ -8,7 +10,10 @@ export type RuleFunction = (config: ZinePageConfig) => void;
 /** Safely type your own rules with this */
 export type RuleGenerator = (...args: any[]) => RuleFunction;
 /** Function that generates a hydrated template */
-export type TemplateGenerator = (props: ZinePageConfig) => JSX.Element;
+export type TemplateGenerator = (
+  props: ZinePageConfig,
+  ref: MutableRefObject<any>
+) => JSX.Element;
 /** The core members of a TemplateSetup */
 export interface TemplateSetup {
   generator: TemplateGenerator;
@@ -45,9 +50,9 @@ export class Template {
     this.bundle = new TemplateBundle(config.templateId);
   }
   /** Uses `TemplateBundle.generator` and hydrates it with props. */
-  hydrate(): JSX.Element {
+  hydrate(ref: MutableRefObject<any>): JSX.Element {
     const { generator } = this.bundle;
-    return generator(this.props);
+    return generator(this.props, ref);
   }
   /** Uses TemplateBundle.rules to validate this.props
    * @throws {InvalidTemplatePropsError} */

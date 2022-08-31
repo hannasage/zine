@@ -1,6 +1,7 @@
 import {
   createContext,
   FC,
+  MutableRefObject,
   PropsWithChildren,
   useContext,
   useEffect,
@@ -10,15 +11,19 @@ import {
   EmptyZineError,
   PageFeatureController,
   useAvailablePages,
+  usePageRefs,
   ZinePageConfig,
 } from "../../framework";
+import { PageRefController } from "../../framework/extensions-hooks/usePageRefs";
 
-interface IPageContext extends PageFeatureController {}
+interface IPageContext extends PageFeatureController, PageRefController {}
 // Create the default PageContext (empty)
 const PageContext = createContext<IPageContext>({
   availablePages: [] as ZinePageConfig[],
   makeNextPageAvailable: () => {},
-} as PageFeatureController);
+  sendRefToProvider: (_ref: MutableRefObject<any>, _index: number) => {},
+  scrollToRef: (_index: number) => {},
+} as IPageContext);
 
 /** Wrap the app in this and provide the useAvailablePages functionality to every
  * component. */
@@ -30,9 +35,19 @@ const PageProvider: FC<PropsWithChildren<{ zine: ZinePageConfig[] }>> = ({
   useEffect(() => {
     if (zine.length === 0) throw new EmptyZineError();
   }, [zine]);
-  const pagesHook = useAvailablePages(zine);
+
+  const availablePagesHook = useAvailablePages(zine); // Page limiter
+  const pageRefsHook = usePageRefs(); // Snap scroller
+
   return (
-    <PageContext.Provider value={pagesHook}>{children}</PageContext.Provider>
+    <PageContext.Provider
+      value={{
+        ...availablePagesHook,
+        ...pageRefsHook,
+      }}
+    >
+      {children}
+    </PageContext.Provider>
   );
 };
 /** Consume the PageProvider value and utilize the controllers for pages */

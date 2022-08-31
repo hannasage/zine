@@ -2,18 +2,19 @@ import React from "react";
 
 import {
   BasicTemplateProps,
-  maxImagesLengthCheck,
   RuleFunction,
-  ZinePageConfig,
+  TemplateGenerator,
 } from "../framework";
+import { imageCountCheck } from "../framework/extensions-rules/imageCount";
 import { Container, Frame, Image } from "../components";
 
 /* Template Component */
-export const ThreesFrameTemplate: React.FC<BasicTemplateProps> = ({
-  images,
-}) => {
+const ThreesFrameTemplate = React.forwardRef<
+  HTMLDivElement,
+  BasicTemplateProps
+>(({ images }, ref) => {
   return (
-    <Container>
+    <Container ref={ref}>
       <Frame width={33} height={88}>
         <Image src={images[0]} />
       </Frame>
@@ -25,12 +26,12 @@ export const ThreesFrameTemplate: React.FC<BasicTemplateProps> = ({
       </Frame>
     </Container>
   );
-};
+});
 
 /* Setup Rules */
-export const ThreesFrameRules: RuleFunction[] = [maxImagesLengthCheck(3)];
+export const ThreesFrameRules: RuleFunction[] = [imageCountCheck(3)];
 /* Setup Generator */
-export const ThreesFrameGenerator = (props: ZinePageConfig) => (
+export const ThreesFrameGenerator: TemplateGenerator = (props, ref) => (
   <ThreesFrameTemplate
     images={props.images}
     viewTimeRequirement={props.viewTimeRequirement}

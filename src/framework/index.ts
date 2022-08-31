@@ -11,11 +11,12 @@ import InvalidTemplatePropsError from "./errors/InvalidTemplatePropsError";
 import UndefinedSetupError from "./errors/UndefinedSetupError";
 import EmptyZineError from "./errors/EmptyZineError";
 import { PageFeatureController } from "./extensions-hooks/useAvailablePages";
-import { maxImagesLengthCheck } from "./extensions-rules/common-rules";
-import { minimumViewTimeCheck } from "./extensions-rules/common-rules";
+import { imageCountCheck } from "./extensions-rules/imageCount";
+import { minimumViewTimeCheck } from "./extensions-rules/minimumViewTime";
 import { useAvailablePages } from "./extensions-hooks/useAvailablePages";
 import { usePropValidator } from "./extensions-hooks/usePropValidator";
 import { usePageTimer } from "./extensions-hooks/usePageTimer";
+import { usePageRefs } from "./extensions-hooks/usePageRefs";
 // FrameworkImportAnchor
 
 // Core (manually updated)
@@ -33,7 +34,7 @@ export { EmptyZineError };
 export type { PageFeatureController };
 
 // Rules (Generator adds import/export)
-export { maxImagesLengthCheck };
+export { imageCountCheck };
 export { minimumViewTimeCheck };
 // RuleExportAnchor
 
@@ -41,4 +42,5 @@ export { minimumViewTimeCheck };
 export { useAvailablePages };
 export { usePropValidator };
 export { usePageTimer };
+export { usePageRefs };
 // HookExportAnchor

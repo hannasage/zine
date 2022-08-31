@@ -12,7 +12,11 @@ export const Zine = () => {
     <>
       {availablePages &&
         availablePages.map((config, idx) => (
-          <ZinePage key={`${idx}-${config.templateId}`} {...config} />
+          <ZinePage
+            index={idx}
+            config={config}
+            key={`${idx}-${config.templateId}`}
+          />
         ))}
     </>
   );
