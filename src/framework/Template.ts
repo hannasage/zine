@@ -42,17 +42,19 @@ export class TemplateBundle implements TemplateSetup {
 /** Contains the user's props and desired TemplateBundle */
 export class Template {
   props: ZinePageConfig;
+  ref: MutableRefObject<any>;
   bundle: TemplateBundle;
   /** Construct a Template from a ZinePageConfig
    * @throws {UndefinedSetupError} */
-  constructor(config: ZinePageConfig) {
+  constructor(config: ZinePageConfig, ref: MutableRefObject<any>) {
     this.props = config;
+    this.ref = ref;
     this.bundle = new TemplateBundle(config.templateId);
   }
   /** Uses `TemplateBundle.generator` and hydrates it with props. */
-  hydrate(ref: MutableRefObject<any>): JSX.Element {
+  hydrate(): JSX.Element {
     const { generator } = this.bundle;
-    return generator(this.props, ref);
+    return generator(this.props, this.ref);
   }
   /** Uses TemplateBundle.rules to validate this.props
    * @throws {InvalidTemplatePropsError} */

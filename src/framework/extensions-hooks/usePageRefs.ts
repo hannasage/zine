@@ -17,7 +17,7 @@ export const usePageRefs = () => {
   const sendRefToProvider = useCallback(
     (ref: MutableRefObject<any>, index: number) => {
       const newRefItem: PageRef = { ref, index };
-      addToRefs((state) => [newRefItem, ...state]);
+      addToRefs((state) => [...state, newRefItem]);
     },
     []
   );
@@ -26,6 +26,7 @@ export const usePageRefs = () => {
     (index: number) => {
       const refToScrollTo = refs.find((ref) => ref.index === index);
       if (refToScrollTo !== undefined) {
+        console.log(refToScrollTo, index);
         refToScrollTo.ref.current.scrollIntoView();
       } else {
         console.warn(`Ref not found at index: ${index}`);

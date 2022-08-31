@@ -17,6 +17,7 @@ import { useAvailablePages } from "./extensions-hooks/useAvailablePages";
 import { usePropValidator } from "./extensions-hooks/usePropValidator";
 import { usePageTimer } from "./extensions-hooks/usePageTimer";
 import { usePageRefs } from "./extensions-hooks/usePageRefs";
+import { usePageControls } from "./extensions-hooks/usePageControls";
 // FrameworkImportAnchor
 
 // Core (manually updated)
@@ -43,4 +44,5 @@ export { useAvailablePages };
 export { usePropValidator };
 export { usePageTimer };
 export { usePageRefs };
+export { usePageControls };
 // HookExportAnchor
