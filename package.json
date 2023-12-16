@@ -1,7 +1,7 @@
 {
-  "name": "zine",
+  "name": "@normellis/zine",
   "version": "0.1.0",
-  "author": "khaube",
+  "author": "normellis",
   "main": "src/index.ts" ,
   "dependencies": {
     "react": "^18.2.0",
