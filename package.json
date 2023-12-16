@@ -1,13 +1,13 @@
 {
   "name": "zine",
   "version": "0.1.0",
+  "author": "khaube",
   "private": true,
+  "main": "src/index.ts" ,
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "styled-components": "^5.3.5",
-    "web-vitals": "^3.0.0"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -26,10 +26,6 @@
     "typescript": "^4.8.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "lint:write": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
     "cli:init": "cd cli && yarn link && cd ../ && yarn link zine-cli"
   },
@@ -72,17 +68,5 @@
         }
       ]
     }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
